@@ -38,7 +38,7 @@ const ContactForm = () => {
   return (
     <Fragment>
       <ToastContainer />
-      <div class="h-[24rem] border border-red-600 bg-white opacity-70 md:h-[31rem] md:w-1/2">
+      <div class="h-[24rem] bg-white opacity-70 md:h-[31rem] md:w-1/2">
         <div class="m-auto mt-12  flex max-w-lg flex-col rounded-lg border border-customGreen px-4 md:mt-[2.7rem] md:max-w-sm lg:max-w-xl">
           {/* Contact us form */}
           <form
