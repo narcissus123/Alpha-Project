@@ -29,7 +29,6 @@ const ContactForm = () => {
       if (response.success) {
         toast.success("You are successfully signed in!");
       } else {
-        console.log(response);
         toast.error("Something went wrong! Please try again.");
       }
     } catch (error) {

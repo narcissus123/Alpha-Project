@@ -8,7 +8,7 @@ import { EnrollmentImage } from "./enrollmentImage/EnrollmentImage";
 // This section leads the user to the login page.
 const EnrollmentSection = () => {
   const user = useAuth();
-  console.log("user:", user.isUser);
+
   const [show, doShow] = useState({ itemOne: false });
 
   /* Animating image based on scroll position */
