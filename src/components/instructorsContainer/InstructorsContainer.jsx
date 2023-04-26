@@ -6,7 +6,7 @@ import { Top } from "../layout/contentLayout/top/Top";
 import { InstructorCard } from "./instructorCard/InstructorCard";
 
 import { getInstructors } from "../../core/services/api/Employee.api";
-import { InstructorSearchBasedFilter } from "../../core/utils/Filter";
+import { filter, InstructorSearchBasedFilter } from "../../core/utils/Filter";
 
 // This component renders information about instructors.
 const InstructorsContainer = () => {
@@ -35,9 +35,10 @@ const InstructorsContainer = () => {
 
   /* Filter courses based on search input */
   const [searchedInstructor, setSearchedInstructor] = useState("");
-  let filteredData = InstructorSearchBasedFilter(
+  let filteredData = filter(
     instructorsInfo,
-    searchedInstructor
+    searchedInstructor,
+    InstructorSearchBasedFilter
   );
 
   return (

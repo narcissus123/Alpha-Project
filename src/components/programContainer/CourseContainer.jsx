@@ -10,7 +10,7 @@ import { Pagination } from "../common/pagination/Pagination";
 import { getCourses } from "../../core/services/api/Courses.api";
 import { sortCourses } from "../../core/utils/Sort";
 import { itemsRange } from "../../core/utils/paginate";
-import { CourseSearchBasedFilter } from "../../core/utils/Filter";
+import { CourseSearchBasedFilter, filter } from "../../core/utils/Filter";
 
 // This component renders courses.
 const CourseContainer = () => {
@@ -44,7 +44,11 @@ const CourseContainer = () => {
 
   /* Filter courses based on search input */
   const [searchedCourse, setSearchedCourse] = useState("");
-  let filteredData = CourseSearchBasedFilter(courseInfo, searchedCourse);
+  let filteredData = filter(
+    courseInfo,
+    searchedCourse,
+    CourseSearchBasedFilter
+  );
 
   /* Calculating the first and last items of the current page */
   let [firstItem, lastItem] = itemsRange(

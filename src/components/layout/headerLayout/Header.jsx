@@ -3,7 +3,10 @@ import { LogoImage, MenuImage } from "../../../assets/svg/Svg";
 import { getItem } from "../../../core/services/storage/Storage";
 import { useAuth } from "../../../context/AuthContext";
 import { Link } from "react-router-dom";
-
+import {
+  dropdown,
+  navbarItems,
+} from "../../../configs/data/headerNavbarData/HeaderNavbar";
 // This component renders the header of our application.
 const Header = () => {
   // Check to see if user signed in or not. The menu differs based on user authentication status.
@@ -58,61 +61,41 @@ const Header = () => {
             )}
 
             <ul class="py-2 text-sm text-gray-700">
-              <li class="block px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff] md:hidden">
-                <Link to="/home" class="block w-full">
-                  Home
-                </Link>
-              </li>
-              <li class="block px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff] md:hidden">
-                <Link to="/programs" class="block w-full">
-                  Programs
-                </Link>
-              </li>
-              <li class="block px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff] md:hidden">
-                <Link to="/instructors" class="block w-full">
-                  Instructors
-                </Link>
-              </li>
-              <li class="block px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff] md:hidden">
-                <Link to="/news" class="block w-full">
-                  News
-                </Link>
-              </li>
-              <li class="block px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff] md:hidden">
-                <Link to="/about-us" class="block w-full">
-                  About Us
-                </Link>
-              </li>
-
-              <li
-                class={`${
-                  !auth.isUser ? "block" : "hidden"
-                } px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff]`}
-              >
-                <Link to="/login" class="block w-full">
-                  Sign in
-                </Link>
-              </li>
-
-              <li
-                class={`${
-                  auth.isUser ? "block" : "hidden"
-                } px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff]`}
-              >
-                <Link to="/profile" class="block w-full">
-                  Dashboard
-                </Link>
-              </li>
-
-              <li
-                class={`${
-                  auth.isUser ? "block" : "hidden"
-                } px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff]`}
-              >
-                <Link to="/logout" class="block w-full">
-                  Sign out
-                </Link>
-              </li>
+              {dropdown.map((navItem, index) =>
+                navItem.title === "Dashboard" ||
+                navItem.title === "Sign out" ? (
+                  <li
+                    key={index}
+                    class={`${
+                      !auth.isUser ? "hidden" : "block"
+                    } px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff]`}
+                  >
+                    <Link to={navItem.link} class="block w-full">
+                      {navItem.title}
+                    </Link>
+                  </li>
+                ) : navItem.title === "Sign in" ? (
+                  <li
+                    key={index}
+                    class={`${
+                      auth.isUser ? "hidden" : "block"
+                    } px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff]`}
+                  >
+                    <Link to={navItem.link} class="block w-full">
+                      {navItem.title}
+                    </Link>
+                  </li>
+                ) : (
+                  <li
+                    key={index}
+                    class="block px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff] md:hidden"
+                  >
+                    <Link to={navItem.link} class="block w-full">
+                      {navItem.title}
+                    </Link>
+                  </li>
+                )
+              )}
             </ul>
           </div>
         </div>
@@ -120,56 +103,29 @@ const Header = () => {
         {/* Menu for medium and large screen sizes. */}
         <div class="hidden items-end justify-between md:order-1 md:mr-3 md:flex md:w-auto md:items-center">
           <ul class="flex flex-row space-x-8 py-2 text-base font-bold text-gray-700">
-            <li>
-              <Link
-                to="/home"
-                class="block p-0 text-gray-700 hover:text-blue-700 focus:text-blue-700"
-                aria-current="page"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/programs"
-                class="block p-0 text-gray-700 hover:text-blue-700 focus:text-blue-700"
-              >
-                Programs
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/instructors"
-                class="block p-0 text-gray-700  hover:text-blue-700 focus:text-blue-700"
-              >
-                Instructors
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/news"
-                class="block p-0 text-gray-700 hover:text-blue-700 focus:text-blue-700"
-              >
-                News
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about-us"
-                class="block p-0 text-gray-700 hover:text-blue-700 focus:text-blue-700"
-              >
-                About Us
-              </Link>
-            </li>
-            {!auth.isUser && (
-              <li>
-                <Link
-                  to="/login"
-                  class="block p-0 text-gray-700 hover:text-blue-700 focus:text-blue-700"
-                >
-                  Sign in
-                </Link>
-              </li>
+            {navbarItems.map((navItem, index) =>
+              navItem.title === "Sign in" ? (
+                !auth.isUser && (
+                  <li>
+                    <Link
+                      to="/login"
+                      class="block p-0 text-gray-700 hover:text-blue-700 focus:text-blue-700"
+                    >
+                      Sign in
+                    </Link>
+                  </li>
+                )
+              ) : (
+                <li key={index}>
+                  <Link
+                    to={navItem.link}
+                    class="block p-0 text-gray-700 hover:text-blue-700 focus:text-blue-700"
+                    aria-current="page"
+                  >
+                    {navItem.title}
+                  </Link>
+                </li>
+              )
             )}
           </ul>
         </div>

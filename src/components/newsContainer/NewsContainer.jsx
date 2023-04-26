@@ -10,7 +10,7 @@ import { Pagination } from "../common/pagination/Pagination";
 import { getNews } from "../../core/services/api/News.api";
 import { sortNews } from "../../core/utils/Sort";
 import { itemsRange } from "../../core/utils/paginate";
-import { NewsSearchBasedFilter } from "../../core/utils/Filter";
+import { filter, NewsSearchBasedFilter } from "../../core/utils/Filter";
 
 // This component renders news and articles.
 const NewsContainer = () => {
@@ -43,7 +43,7 @@ const NewsContainer = () => {
 
   /* Filter courses based on search input */
   const [searchedNews, setSearchedNews] = useState("");
-  let filteredData = NewsSearchBasedFilter(newsInfo, searchedNews);
+  let filteredData = filter(newsInfo, searchedNews, NewsSearchBasedFilter);
 
   /* Calculating the first and last items of the current page */
   let [firstItem, lastItem] = itemsRange(

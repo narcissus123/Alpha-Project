@@ -14,43 +14,27 @@ function FilterNewsAndPub(data) {
   return [news, publications];
 }
 
-function CourseSearchBasedFilter(allCourses, searchedCourse) {
+function filter(allData, searchedWord, callBackFunc) {
   let filteredData;
-  if (searchedCourse === "") {
-    filteredData = allCourses;
+  if (searchedWord === "") {
+    filteredData = allData;
   } else {
-    filteredData = allCourses.filter((courseItem) =>
-      courseItem.title.toLowerCase().includes(searchedCourse.toLowerCase())
-    );
+    filteredData = allData.filter((item) => callBackFunc(item, searchedWord));
   }
 
   return filteredData;
 }
 
-function NewsSearchBasedFilter(allNews, searchedWord) {
-  let filteredData;
-  if (searchedWord === "") {
-    filteredData = allNews;
-  } else {
-    filteredData = allNews.filter((news) =>
-      news.title.toLowerCase().includes(searchedWord.toLowerCase())
-    );
-  }
-
-  return filteredData;
+function NewsSearchBasedFilter(item, searchedWord) {
+  return item.title.toLowerCase().includes(searchedWord.toLowerCase());
 }
 
-function InstructorSearchBasedFilter(allInstructors, searchedWord) {
-  let filteredData;
-  if (searchedWord === "") {
-    filteredData = allInstructors;
-  } else {
-    filteredData = allInstructors.filter((instructor) =>
-      instructor.fullName.toLowerCase().includes(searchedWord.toLowerCase())
-    );
-  }
+function CourseSearchBasedFilter(item, searchedCourse) {
+  return item.title.toLowerCase().includes(searchedCourse.toLowerCase());
+}
 
-  return filteredData;
+function InstructorSearchBasedFilter(item, searchedWord) {
+  return item.fullName.toLowerCase().includes(searchedWord.toLowerCase());
 }
 
 export {
@@ -59,4 +43,5 @@ export {
   CourseSearchBasedFilter,
   InstructorSearchBasedFilter,
   NewsSearchBasedFilter,
+  filter,
 };
