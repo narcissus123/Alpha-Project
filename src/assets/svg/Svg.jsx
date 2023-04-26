@@ -391,7 +391,6 @@ export const RegisteredCoursesImage = ({ Class }) => {
 export const LogoImage = ({ Class }) => {
   return (
     <svg
-      class={Class}
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"
@@ -399,6 +398,7 @@ export const LogoImage = ({ Class }) => {
       height="2.5rem"
       width="2.5rem"
       xmlns="http://www.w3.org/2000/svg"
+      className={Class}
     >
       <path
         fillRule="evenodd"
