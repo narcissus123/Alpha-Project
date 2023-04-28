@@ -1,4 +1,4 @@
-import { RingLoader } from "react-spinners";
+import { RingLoader, ClipLoader } from "react-spinners";
 
 // This component displays spinner untill the server responses to application request.
 const Spinner = ({ Class }) => {
@@ -18,4 +18,12 @@ const Spinner = ({ Class }) => {
   );
 };
 
-export { Spinner };
+const ButtonSpinner = ({ Class }) => {
+  return (
+    <div class={`${Class}`}>
+      <ClipLoader color="#cca349" size={14} />
+    </div>
+  );
+};
+
+export { Spinner, ButtonSpinner };
