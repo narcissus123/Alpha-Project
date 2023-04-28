@@ -45,7 +45,7 @@ const ContactForm = () => {
     <Fragment>
       <ToastContainer />
       <div class="h-[24rem] bg-white opacity-70 md:h-[31rem] md:w-1/2">
-        <div class="m-auto mt-12  flex max-w-lg flex-col rounded-lg border border-customGreen px-4 md:mt-[2.7rem] md:max-w-sm lg:max-w-xl">
+        <div class="m-auto mt-12 flex  max-w-lg flex-col rounded-lg border border-customGreen px-4 text-black md:mt-[2.7rem] md:max-w-sm lg:max-w-xl">
           {/* Contact us form */}
           <form
             class="my-4 mb-6"
@@ -60,7 +60,7 @@ const ContactForm = () => {
             </label>
             <input
               id="email"
-              class="mb-2 block w-1/2 rounded-lg border border-gray-200 py-1.5 px-2 text-gray-900 focus:outline-none focus:ring-0"
+              class="mb-2 block w-1/2 rounded-lg border border-gray-200 bg-white py-1.5 px-2 text-gray-900 focus:outline-none focus:ring-0"
               placeholder="example@domain.com"
               {...register("email", { required: "This is required." })}
             />
@@ -73,7 +73,7 @@ const ContactForm = () => {
               <textarea
                 id="text"
                 rows="6"
-                class="-mb-2 w-full border-0 px-0 text-sm text-gray-900 focus:outline-none focus:ring-0"
+                class="-mb-2 w-full border-0 bg-white px-0 text-sm text-gray-900 focus:outline-none focus:ring-0"
                 placeholder="Write a comment..."
                 {...register("text", {
                   required: "This is required.",

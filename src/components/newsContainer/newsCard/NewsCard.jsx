@@ -19,7 +19,7 @@ const NewsCard = ({ news }) => {
       />
 
       {/* News / publication information */}
-      <div class="mx-auto h-4/6 w-64 overflow-hidden rounded-2xl bg-white sm:w-72 lg:w-80">
+      <div class="mx-auto h-4/6 w-64 overflow-hidden rounded-2xl bg-white text-black sm:w-72 lg:w-80">
         <div class="h-1/4 rounded-t-3xl" />
 
         <div class="group h-3/4 rounded-b-2xl sm:text-base md:text-lg">

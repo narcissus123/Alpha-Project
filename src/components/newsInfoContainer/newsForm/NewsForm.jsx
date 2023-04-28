@@ -65,7 +65,7 @@ const NewsForm = ({ param }) => {
           {/* Comment form */}
           <form class="my-4 mb-6" onSubmit={handleSubmit(onSubmit)}>
             <input
-              class="mb-2 w-1/3 rounded-lg border border-gray-200 py-1.5 px-2 text-gray-900 focus:outline-none focus:ring-0"
+              class="mb-2 w-1/3 rounded-lg border border-gray-200 bg-white py-1.5 px-2 text-gray-900 focus:outline-none focus:ring-0"
               placeholder="Username"
               {...register("userName", { required: "This is required." })}
             />
@@ -75,7 +75,7 @@ const NewsForm = ({ param }) => {
               <textarea
                 id="comment"
                 rows="6"
-                class="-mb-2 w-full border-0 px-0 text-sm text-gray-900 focus:outline-none focus:ring-0"
+                class="-mb-2 w-full border-0 bg-white px-0 text-sm text-gray-900 focus:outline-none focus:ring-0"
                 placeholder="Write a comment..."
                 {...register("comment", {
                   required: "This is required.",

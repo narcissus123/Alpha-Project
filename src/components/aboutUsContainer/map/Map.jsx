@@ -31,7 +31,7 @@ const Map = () => {
         </MapContainer>
 
         {/* Map footer. */}
-        <div class="flex w-full flex-row gap-2 bg-slate-50 py-3 px-3">
+        <div class="flex w-full flex-row gap-2 bg-slate-50 py-3 px-3 text-black">
           <MapPin />
           <div>
             <span class="w-full text-xs sm:text-sm">

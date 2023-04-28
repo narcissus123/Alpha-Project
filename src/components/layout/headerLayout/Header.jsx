@@ -19,7 +19,7 @@ const Header = () => {
     <nav class="relative z-50 h-16 bg-white px-2 drop-shadow-md sm:px-4">
       <div class="flex h-16 items-center justify-between ">
         {/* Logo */}
-        <div class="flex items-center">
+        <div class="flex items-center text-slate-800 hover:text-[#747bff]">
           <span class="self-center whitespace-nowrap border border-customGreen2 p-1 text-2xl font-extrabold">
             <Link to="/home">
               <LogoImage Class="border-2 border-customGreen2" />

@@ -32,7 +32,7 @@ const EnrollmentSection = () => {
             <span class="block"> Students </span>
           </li>
         </ul>
-        <span class=" mx-auto w-4/5 lg:w-3/5">
+        <span class=" mx-auto w-4/5 text-gray-600 lg:w-3/5">
           By registering into our site, make access to services faster and
           easier for yourself.{" "}
         </span>

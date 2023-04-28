@@ -23,13 +23,13 @@ const AboutNews = ({ param }) => {
           Loading...
         </p>
       ) : (
-        <div class="flex h-auto w-screen flex-row justify-center overflow-hidden border-t bg-white py-12">
+        <div class="flex h-auto w-screen flex-row justify-center overflow-hidden border-t bg-white py-12 text-gray-700">
           <ul class="flex h-full w-1/2  flex-col justify-center pl-10 text-base md:text-lg">
             <li>
               <span class="block text-4xl md:text-[2.75rem]">{data.title}</span>
             </li>
             <li>
-              <hr class="my-5 w-1/2 border border-slate-400"></hr>
+              <hr class="my-5 w-1/2 border border-customGreen2"></hr>
             </li>
             <li>
               <span>Category: </span>

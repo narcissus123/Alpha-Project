@@ -32,7 +32,7 @@ const NewsComments = ({ param }) => {
     <section class="opacity-3 w-screen bg-white py-8 lg:py-16">
       <ToastContainer />
       {comment != [] ? (
-        <div class="ml-8 flex max-w-6xl flex-col border-t border-customGreen2 px-4 ">
+        <div class="ml-8 flex max-w-6xl flex-col border-t border-customGreen2 px-4 text-slate-800">
           <>
             {/* Title */}
             <div class="mb-6">
@@ -68,7 +68,7 @@ const NewsComments = ({ param }) => {
         // This message is displayed if no one has left a comment or there are no verified comments.
         <AlertMessage
           message="No comments available for this news."
-          Class={" text-gray-800 pt-2 pb-2 text-lg border w-screen "}
+          Class={" text-slate-800 pt-2 pb-2 text-lg border w-screen"}
         />
       )}
     </section>

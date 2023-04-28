@@ -38,7 +38,7 @@ const UserPanelContainer = (props) => {
         } z-20 flex h-[43rem] justify-between bg-black bg-opacity-80 sm:w-[36%] md:w-[32%] lg:static lg:w-[20%] lg:bg-transparent`}
       >
         <div class="h-full w-full">
-          <div class="ml-1/12 mt-12 flex w-10/12 items-center gap-4 rounded-xl border bg-white p-2 lg:mx-auto lg:mt-14 lg:w-11/12 lg:p-3">
+          <div class="ml-1/12 mt-12 flex w-10/12 items-center gap-4 rounded-xl border bg-white p-2 text-slate-800 lg:mx-auto lg:mt-14 lg:w-11/12 lg:p-3">
             <div class="rounded-full border border-customGreen ">
               <UserImage3 />
             </div>

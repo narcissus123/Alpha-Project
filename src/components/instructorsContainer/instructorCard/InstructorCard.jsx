@@ -47,7 +47,7 @@ const InstructorCard = ({ instructor, id }) => {
               secondOrbitClass="absolute h-full w-full rounded-full border"
               thirdOrbitClass="absolute ml-9 mt-9 h-3/4 w-3/4 overflow-hidden rounded-full border md:ml-12 md:mt-12"
               icon={
-                <InstructorImage2 Class="h-full w-full bg-white pt-3 opacity-80" />
+                <InstructorImage2 Class="h-full w-full bg-white pt-3 opacity-80 text-slate-800" />
               }
             />
           </div>
@@ -88,7 +88,9 @@ const InstructorCard = ({ instructor, id }) => {
               firstOrbitClass="absolute ml-5 mt-5 h-6/7 w-6/7 rounded-full border border-slate-600 sm:ml-6 sm:mt-6 md:ml-7 md:mt-7"
               secondOrbitClass="absolute h-full w-full rounded-full border border-slate-600"
               thirdOrbitClass="absolute ml-9 mt-9 h-3/4 w-3/4 overflow-hidden rounded-full border md:ml-12 md:mt-12"
-              icon={<InstructorImage2 Class="h-full w-full bg-white pt-3" />}
+              icon={
+                <InstructorImage2 Class="h-full w-full bg-white pt-3 border text-slate-800" />
+              }
             />
           </div>
         </div>

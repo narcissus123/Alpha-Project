@@ -8,7 +8,7 @@ const Search = ({ placeholder, inputValue, handleSearch }) => {
     <div class="flex w-auto flex-row items-center rounded-lg border bg-white py-2">
       <SearchIcon />
       <input
-        class="border-l-2 px-1 text-gray-600 focus:outline-none"
+        class="border-l-2 bg-white px-1 text-gray-600 focus:outline-none"
         placeholder={placeholder}
         type="text"
         value={inputValue}

@@ -7,7 +7,7 @@ const Sort = ({ setSortPathName, category, sortPlaceHolder }) => {
   const [show, setShow] = useState(false);
 
   return (
-    <div class="text-grey-500 relative">
+    <div class="text-grey-500 relative text-gray-600">
       <div class="height-auto flex flex-wrap items-center rounded-md border bg-white">
         <span class="py-1 px-3">{sortPlaceHolder}</span>
         {!show ? (
@@ -27,7 +27,7 @@ const Sort = ({ setSortPathName, category, sortPlaceHolder }) => {
           {category.map((item, index) => (
             <li
               key={index}
-              class="cursor-pointer rounded-t-lg py-2 px-3 hover:bg-slate-100"
+              class="cursor-pointer border-b py-1 px-3 hover:bg-slate-100"
               onClick={() => setSortPathName(item)}
             >
               {item}

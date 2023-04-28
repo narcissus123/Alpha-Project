@@ -26,7 +26,7 @@ const AboutCourse = ({ param }) => {
           Loading...
         </p>
       ) : (
-        <div class="flex h-[40rem] w-auto flex-row justify-center overflow-hidden border-t bg-white transition-all duration-700">
+        <div class="flex h-[40rem] w-auto flex-row justify-center overflow-hidden border-t bg-white text-slate-800 transition-all duration-700">
           <ul class="flex h-full w-1/2  flex-col justify-center pl-10 text-base md:text-lg">
             <li>
               <span class="block text-4xl md:text-[2.75rem]">{data.title}</span>

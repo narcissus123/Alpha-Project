@@ -41,9 +41,9 @@ const CourseCard = ({ courseItem }) => {
         }`}
       >
         <div class="h-1/4 rounded-t-3xl" />
-        <div class="group relative h-3/4 rounded-b-2xl pl-2 sm:text-base md:pl-6 md:text-lg lg:pl-4">
+        <div class="group relative h-3/4 rounded-b-2xl pl-2 text-black sm:text-base md:pl-6 md:text-lg lg:pl-4">
           <div class="mr-4">
-            <p class="text-center text-xl font-bold leading-10">
+            <p class="text-center text-xl font-bold leading-10 ">
               {courseItem.lesson.lessonName}
             </p>
           </div>
@@ -82,7 +82,7 @@ const CourseCard = ({ courseItem }) => {
         {/* Links to shopping cart and individual course pages */}
         <ul
           id={courseItem._id}
-          class={`relative h-1/3 rounded-b-2xl border bg-slate-50 ${
+          class={`relative h-1/3 rounded-b-2xl border bg-slate-50 text-black ${
             show
               ? "top-1 transition-all duration-1000"
               : "-top-[6.5rem] transition-all duration-1000"

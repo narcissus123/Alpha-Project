@@ -25,7 +25,7 @@ const Input = React.forwardRef(
         <label>
           <span class={labelClass}>{children}</span>
           <input
-            class={inputClass}
+            class={`bg-white ${inputClass}`}
             type={type}
             placeholder={placeholder}
             ref={ref}
