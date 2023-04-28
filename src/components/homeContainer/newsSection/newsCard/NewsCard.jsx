@@ -1,31 +1,14 @@
-import { useState, useRef, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 
+import { ImageFrame } from "../../../common/imageFrame/ImageFrame";
+
 import { truncate } from "../../../../core/utils/Truncate";
+import { UseComponentIntoView } from "../../../../hooks/UseComponentIntoView";
 
 // This component renders each individual news / article in a card.
 const NewsCard = ({ data, index }) => {
-  const [show, doShow] = useState({ itemOne: false });
-
   /* Animating image based on scroll position */
-  const picRef = useRef(null);
-
-  useLayoutEffect(() => {
-    const topPos = (element) => element.getBoundingClientRect().top;
-    //added to reduce redundancy
-    const divPos = topPos(picRef.current);
-
-    const onScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight;
-      if (divPos / 1.3 < scrollPos) {
-        doShow((state) => ({ ...state, itemOne: true }));
-      } else if (divPos > scrollPos) {
-        doShow((state) => ({ ...state, itemOne: false }));
-      }
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const { picRef, show } = UseComponentIntoView();
 
   return (
     /* news / publication information and image */
@@ -78,17 +61,13 @@ const NewsCard = ({ data, index }) => {
           }`}
           ref={picRef}
         >
-          <div class="h-full w-full rounded-full border">
-            <div class="absolute ml-6 mt-6 h-10/12 w-10/12 rounded-full border md:ml-8 md:mt-8">
-              <div class="relative left-1/2 bottom-2 h-3 w-3 rounded-full border bg-yellow-300"></div>
-            </div>
-
-            <div class="absolute ml-3 mt-3 h-11/12 w-11/12 rounded-full border md:ml-4 md:mt-4">
-              <div class="relative left-1/2 top-[98%] h-3 w-3 rounded-full border bg-yellow-300"></div>
-            </div>
-
-            <div class="absolute ml-9 mt-9 h-3/4 w-3/4 rounded-full border bg-newsImg bg-cover bg-no-repeat md:ml-12 md:mt-12"></div>
-          </div>
+          <ImageFrame
+            frameClass="h-full w-full rounded-full border"
+            firstOrbitClass="absolute ml-6 mt-6 h-10/12 w-10/12 rounded-full border md:ml-8 md:mt-8"
+            secondOrbitClass="absolute ml-3 mt-3 h-11/12 w-11/12 rounded-full border md:ml-4 md:mt-4"
+            thirdOrbitClass="absolute ml-9 mt-9 h-3/4 w-3/4 overflow-hidden rounded-full border bg-newsImg bg-cover bg-no-repeat md:ml-12 md:mt-12"
+            image={data.image}
+          />
         </div>
       ) : (
         <div
@@ -99,17 +78,13 @@ const NewsCard = ({ data, index }) => {
           }`}
           ref={picRef}
         >
-          <div class="h-full w-full rounded-full border">
-            <div class="absolute ml-6 mt-6 h-10/12 w-10/12 rounded-full border md:ml-8 md:mt-8">
-              <div class="relative left-1/2 bottom-2 h-3 w-3 rounded-full border bg-yellow-300"></div>
-            </div>
-
-            <div class="absolute ml-3 mt-3 h-11/12 w-11/12 rounded-full border md:ml-4 md:mt-4">
-              <div class="relative left-1/2 top-[98%] h-3 w-3 rounded-full border bg-yellow-300"></div>
-            </div>
-
-            <div class="absolute ml-9 mt-9 h-3/4 w-3/4 rounded-full border bg-newsImg bg-cover bg-no-repeat md:ml-12 md:mt-12"></div>
-          </div>
+          <ImageFrame
+            frameClass="h-full w-full rounded-full border"
+            firstOrbitClass="absolute ml-6 mt-6 h-10/12 w-10/12 rounded-full border md:ml-8 md:mt-8"
+            secondOrbitClass="absolute ml-3 mt-3 h-11/12 w-11/12 rounded-full border md:ml-4 md:mt-4"
+            thirdOrbitClass="absolute ml-9 mt-9 h-3/4 w-3/4 overflow-hidden rounded-full border bg-newsImg bg-cover bg-no-repeat md:ml-12 md:mt-12"
+            image={data.image}
+          />
         </div>
       )}
     </div>

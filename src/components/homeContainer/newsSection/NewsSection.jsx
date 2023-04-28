@@ -7,6 +7,7 @@ import { Spinner } from "../../common/spinner/Spinner";
 
 import { FilterNewsAndPub } from "../../../core/utils/Filter";
 import { getNews } from "../../../core/services/api/News.api";
+import { useFetch } from "../../../hooks/useFetch";
 
 // This component renders some of the news and articles in the home page.
 const NewsSection = () => {
@@ -16,29 +17,9 @@ const NewsSection = () => {
     toggle != active && setActive(toggle);
   };
 
-  /* Rendering spinner while we are waiting for backend response. */
-  const [isLoading, setIsLoading] = useState(true);
-
-  /* Saving news information sent from backend. */
-  const [newsInfo, setNewsInfo] = useState([]);
-
-  const getAllNews = async () => {
-    try {
-      const data = await getNews();
-      if (data.success) {
-        const filteredData = FilterNewsAndPub(data.result);
-        setNewsInfo(filteredData);
-        setIsLoading(false);
-      }
-    } catch (error) {
-      // console.log(error);
-    }
-  };
-
-  /* Call API to get all news.*/
-  useEffect(() => {
-    getAllNews();
-  }, []);
+  /* Call API to get all news and articles.*/
+  const { isLoading, data } = useFetch(getNews);
+  const filteredData = FilterNewsAndPub(data);
 
   return (
     <Fragment>
@@ -75,11 +56,11 @@ const NewsSection = () => {
               <>
                 {/* News Category */}
                 {active == 1 &&
-                  (newsInfo[0].length !== 0
-                    ? newsInfo[0].map((news, index) => (
+                  (filteredData[0].length !== 0
+                    ? filteredData[0].map((news, index) => (
                         <NewsCard key={index} index={index} data={news} />
                       ))
-                    : newsInfo[1].length === 0 && (
+                    : filteredData[1].length === 0 && (
                         <AlertMessage
                           message="No news available!"
                           Class={"text-gray-800 h-[40rem] w-screen pt-20"}
@@ -87,15 +68,15 @@ const NewsSection = () => {
                       ))}
                 {/* Article category. */}
                 {active == 2 &&
-                  (newsInfo[1].length !== 0
-                    ? newsInfo[1].map((publication, index) => (
+                  (filteredData[1].length !== 0
+                    ? filteredData[1].map((publication, index) => (
                         <NewsCard
                           key={index}
                           index={index}
                           data={publication}
                         />
                       ))
-                    : newsInfo[1].length === 0 && (
+                    : filteredData[1].length === 0 && (
                         <AlertMessage
                           message="No publications available!"
                           Class={" text-gray-800 h-[40rem] w-screen pt-20"}

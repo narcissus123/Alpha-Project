@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -11,32 +11,12 @@ import { getCourses } from "../../core/services/api/Courses.api";
 import { sortCourses } from "../../core/utils/Sort";
 import { itemsRange } from "../../core/utils/paginate";
 import { CourseSearchBasedFilter, filter } from "../../core/utils/Filter";
+import { useFetch } from "../../hooks/useFetch";
 
 // This component renders courses.
 const CourseContainer = () => {
-  /* Rendering spinner while we are waiting for backend response. */
-  const [isLoading, setIsLoading] = useState(true);
-
-  /* Saving courses information sent from backend. */
-  const [courseInfo, setCourseInfo] = useState([]);
-
-  const getAllCourses = async () => {
-    try {
-      const data = await getCourses();
-
-      if (data.success) {
-        setCourseInfo(data.result);
-        setIsLoading(false);
-      }
-    } catch (error) {
-      //toast.error("Sorry! There is a problem loading courses.");
-    }
-  };
-
-  /* Call API to get all courses. */
-  useEffect(() => {
-    getAllCourses();
-  }, []);
+  /* Call API to get courses.*/
+  const { isLoading, data } = useFetch(getCourses);
 
   /* Getting current page from pagination component */
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,11 +24,7 @@ const CourseContainer = () => {
 
   /* Filter courses based on search input */
   const [searchedCourse, setSearchedCourse] = useState("");
-  let filteredData = filter(
-    courseInfo,
-    searchedCourse,
-    CourseSearchBasedFilter
-  );
+  let filteredData = filter(data, searchedCourse, CourseSearchBasedFilter);
 
   /* Calculating the first and last items of the current page */
   let [firstItem, lastItem] = itemsRange(

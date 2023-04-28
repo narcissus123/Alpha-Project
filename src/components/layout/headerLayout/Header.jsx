@@ -49,10 +49,10 @@ const Header = () => {
           <div
             class={`${
               open ? "absolute" : "hidden"
-            } top-11 right-10 z-50 my-4 list-none divide-y divide-customGreen2 rounded-lg border border-slate-100 bg-white text-base`}
+            } top-11  right-10 z-50 my-4 list-none divide-y divide-customGreen2 overflow-hidden rounded-lg border border-slate-100 bg-white text-base`}
           >
             {auth.isUser && (
-              <div class="px-4 py-4">
+              <div class="m-2 rounded-md border px-4 py-4">
                 <span class="mb-2 block text-base text-gray-900">{`Welcome ${user.fullName}`}</span>
                 <span class="block truncate text-xs font-medium text-gray-500">
                   {user.email}
@@ -60,7 +60,7 @@ const Header = () => {
               </div>
             )}
 
-            <ul class="py-2 text-sm text-gray-700">
+            <ul class="text-sm text-gray-700 last:bottom-0">
               {dropdown.map((navItem, index) =>
                 navItem.title === "Dashboard" ||
                 navItem.title === "Sign out" ? (
@@ -68,7 +68,7 @@ const Header = () => {
                     key={index}
                     class={`${
                       !auth.isUser ? "hidden" : "block"
-                    } px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff]`}
+                    } border-b px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff]`}
                   >
                     <Link to={navItem.link} class="block w-full">
                       {navItem.title}
@@ -79,7 +79,7 @@ const Header = () => {
                     key={index}
                     class={`${
                       auth.isUser ? "hidden" : "block"
-                    } px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff]`}
+                    } border-b px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff]`}
                   >
                     <Link to={navItem.link} class="block w-full">
                       {navItem.title}
@@ -88,7 +88,7 @@ const Header = () => {
                 ) : (
                   <li
                     key={index}
-                    class="block px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff] md:hidden"
+                    class="block border-b px-4 py-2 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff] md:hidden"
                   >
                     <Link to={navItem.link} class="block w-full">
                       {navItem.title}

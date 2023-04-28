@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import { EnrolledCourses } from "./enrolledCourses/EnrolledCourses";
@@ -16,11 +16,10 @@ import {
 } from "../../assets/svg/Svg";
 
 // This component includes the sidebar of user dashboard and the content. Content renders edit form, user registered courses table
-// and all institute courses table. 
+// and all institute courses table.
 const UserPanelContainer = (props) => {
-
   const user = JSON.parse(getItem("user"));
- 
+
   const [active, setActive] = useState(1);
   const toggle = (tab) => {
     if (active !== tab) setActive(tab);
@@ -28,8 +27,6 @@ const UserPanelContainer = (props) => {
 
   const [show, setShow] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState("0");
-  
   return (
     <div class="flex h-[43rem]">
       {/* User panel sidebar */}
@@ -71,7 +68,7 @@ const UserPanelContainer = (props) => {
                 Edit profile
               </Link>
             </li>
-            <li class="group flex flex-wrap items-center gap-3 py-3 pl-2 pr-2 hover:bg-slate-200 active:text-customYellow sm:gap-5 sm:pl-4 lg:py-4">
+            <li class="group flex flex-wrap items-center gap-3 py-3 pl-2 pr-2 hover:bg-slate-200 sm:gap-5 sm:pl-4 lg:py-4">
               <RegisteredCoursesImage Class="w-4 text-white group-hover:text-customYellow sm:w-5 lg:w-6" />
 
               <Link
@@ -94,7 +91,7 @@ const UserPanelContainer = (props) => {
                 All courses
               </Link>
             </li>
-            <li class="group static flex flex-wrap items-center gap-5 py-3 pl-2 pr-2 hover:bg-slate-200 sm:pl-4 lg:hidden lg:py-4">
+            <li class="group flex flex-wrap items-center gap-5 py-3 pl-2 pr-2 hover:bg-slate-200 sm:pl-4 lg:hidden lg:py-4">
               <LogoutImage Class="w-4 text-white group-hover:text-customYellow sm:w-5 lg:w-6" />
               <Link
                 class="text-white group-hover:text-customYellow"

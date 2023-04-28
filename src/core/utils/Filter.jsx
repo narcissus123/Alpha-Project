@@ -9,7 +9,7 @@ function FilterValidComments(comments, param) {
 function FilterNewsAndPub(data) {
   let news = data.filter((item) => item.category == "news");
   news && (news = news.slice(0, 2));
-  let publications = data.filter((item) => item.category == "publications");
+  let publications = data.filter((item) => item.category == "article");
   publications && (publications = publications.slice(0, 2));
   return [news, publications];
 }

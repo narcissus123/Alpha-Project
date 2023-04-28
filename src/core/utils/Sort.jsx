@@ -4,15 +4,15 @@ export function sortNews(comment, sorting) {
   return comment.sort((comment) => {
     if (sorting === "News") {
       if (comment.category === "news") {
-        return 1;
-      } else {
         return -1;
+      } else {
+        return 1;
       }
-    } else if (sorting === "Article") {
+    } else if (sorting === "article") {
       if (comment.category === "article") {
-        return 1;
-      } else {
         return -1;
+      } else {
+        return 1;
       }
     }
   });

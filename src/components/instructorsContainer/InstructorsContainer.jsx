@@ -7,36 +7,17 @@ import { InstructorCard } from "./instructorCard/InstructorCard";
 
 import { getInstructors } from "../../core/services/api/Employee.api";
 import { filter, InstructorSearchBasedFilter } from "../../core/utils/Filter";
+import { useFetch } from "../../hooks/useFetch";
 
 // This component renders information about instructors.
 const InstructorsContainer = () => {
-  /* Rendering spinner while we are waiting for backend response. */
-  const [isLoading, setIsLoading] = useState(true);
-
-  /* Saving instructor information sent from backend. */
-  const [instructorsInfo, setInstructorsInfo] = useState([]);
-  const getAllInstructors = async () => {
-    try {
-      const data = await getInstructors();
-
-      if (data.success) {
-        setInstructorsInfo(data.result);
-        setIsLoading(false);
-      }
-    } catch (error) {
-      //toast.error("Sorry! There is a problem loading instructors data.");
-    }
-  };
-
-  /* Call API to get all courses. */
-  useEffect(() => {
-    getAllInstructors();
-  }, []);
+  /* Call API to get instructors info.*/
+  const { isLoading, data } = useFetch(getInstructors);
 
   /* Filter courses based on search input */
   const [searchedInstructor, setSearchedInstructor] = useState("");
   let filteredData = filter(
-    instructorsInfo,
+    data,
     searchedInstructor,
     InstructorSearchBasedFilter
   );

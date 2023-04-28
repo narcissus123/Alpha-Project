@@ -1,35 +1,16 @@
-import { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { useAuth } from "../../../context/AuthContext";
+import { ImageFrame } from "../../common/imageFrame/ImageFrame";
 
-import { EnrollmentImage } from "./enrollmentImage/EnrollmentImage";
+import { useAuth } from "../../../context/AuthContext";
+import { UseComponentIntoView } from "../../../hooks/UseComponentIntoView";
 
 // This section leads the user to the login page.
 const EnrollmentSection = () => {
   const user = useAuth();
 
-  const [show, doShow] = useState({ itemOne: false });
-
   /* Animating image based on scroll position */
-  const picRef = useRef(null);
-
-  useLayoutEffect(() => {
-    const topPos = (element) => element.getBoundingClientRect().top;
-    //added to reduce redundancy
-    const divPos = topPos(picRef.current);
-
-    const onScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight;
-      if (divPos < scrollPos) {
-        doShow((state) => ({ ...state, itemOne: true }));
-      } else if (divPos > scrollPos) {
-        doShow((state) => ({ ...state, itemOne: false }));
-      }
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const { picRef, show } = UseComponentIntoView();
 
   return (
     <div class="flex h-[47rem] w-auto flex-row overflow-hidden bg-white text-center opacity-70">
@@ -83,7 +64,12 @@ const EnrollmentSection = () => {
         }`}
         ref={picRef}
       >
-        <EnrollmentImage />
+        <ImageFrame
+          frameClass="relative right-0 top-28 h-[30rem] w-[30rem] rounded-full border lg:top-20 lg:h-[35rem] lg:w-[35rem]"
+          firstOrbitClass="absolute ml-8 mt-8 h-6/7 w-6/7 rounded-full border border-slate-400 lg:ml-10 lg:mt-10"
+          secondOrbitClass="absolute h-full w-full rounded-full border border-slate-400"
+          thirdOrbitClass="absolute ml-16 mt-16 h-5/7 w-5/7 rounded-full border bg-enrollImg bg-cover bg-no-repeat lg:ml-20 lg:mt-20 lg:border-slate-400"
+        />
       </div>
     </div>
   );

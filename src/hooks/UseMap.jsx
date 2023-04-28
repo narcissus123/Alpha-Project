@@ -24,7 +24,7 @@ export const useMap = () => {
               const { data } = await axios.get("https://ipapi.co/json");
               setPosition({ lat: data.latitude, lng: data.longitude });
             } catch (err) {
-              console.error("Access to user location is blocked.");
+              //console.error("Access to user location is blocked.");
             }
           };
           fetch();

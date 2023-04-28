@@ -7,12 +7,10 @@ export const AuthProvider = ({ children }) => {
 
   const login = (isUser) => {
     setIsEmployee(isUser);
-    console.log("isEmployee in", isUser);
   };
 
   const logout = (isUser) => {
     setIsEmployee(isUser);
-    console.log("isEmployee out", isUser);
   };
 
   return (

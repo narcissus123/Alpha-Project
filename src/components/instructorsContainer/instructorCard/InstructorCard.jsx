@@ -1,30 +1,15 @@
-import React, { useLayoutEffect, useRef, useState, Fragment } from "react";
+import React, { Fragment } from "react";
+
+import { ImageFrame } from "../../common/imageFrame/ImageFrame";
+
+import { UseComponentIntoView } from "../../../hooks/UseComponentIntoView";
 
 import { InstructorImage2 } from "../../../assets/svg/Svg";
 
 // This component renders a card containing information about each instructor.
 const InstructorCard = ({ instructor, id }) => {
-  const [show, doShow] = useState({ itemOne: false });
-
-  const picRef = useRef(null);
-
   /* Animating image based on scroll position */
-  useLayoutEffect(() => {
-    const topPos = (element) => element.getBoundingClientRect().top;
-    //added to reduce redundancy
-    const divPos = topPos(picRef.current);
-
-    const onScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight;
-      if (divPos / 1.3 < scrollPos) {
-        doShow((state) => ({ ...state, itemOne: true }));
-      } else if (divPos > scrollPos) {
-        doShow((state) => ({ ...state, itemOne: false }));
-      }
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const { picRef, show } = UseComponentIntoView();
 
   return (
     <Fragment>
@@ -37,7 +22,9 @@ const InstructorCard = ({ instructor, id }) => {
               <div class="my-2 whitespace-pre-line rounded-full  text-[13.8px] sm:my-3 md:my-6">
                 <h2 class="text-base font-medium">Courses: </h2>
                 {instructor.courses.map((instru, index) => (
-                  <span key={index} class="pt-2 pr-2">{instru.title},</span>
+                  <span key={index} class="pt-2 pr-2">
+                    {instru.title},
+                  </span>
                 ))}
               </div>
               <div>
@@ -54,17 +41,15 @@ const InstructorCard = ({ instructor, id }) => {
             }`}
             ref={picRef}
           >
-            <div class="h-full w-full rounded-full">
-              <div class="absolute ml-5 mt-5 h-6/7 w-6/7 rounded-full border sm:ml-6 sm:mt-6 md:ml-7 md:mt-7 ">
-                <div class="transform-x-2 relative left-1/2 bottom-2 h-3 w-3 animate-rotation rounded-full border bg-yellow-300 transition-all duration-1000"></div>
-              </div>
-              <div class="absolute h-full w-full rounded-full border">
-                <div class="transform-x-2 relative left-1/2 top-[98%] h-3 w-3 rounded-full border bg-yellow-300 transition-all duration-1000 "></div>
-              </div>
-              <div class="absolute ml-9 mt-9 h-3/4 w-3/4 overflow-hidden rounded-full border md:ml-12 md:mt-12">
-                <InstructorImage2 Class="h-full w-full bg-white  pt-3 opacity-80" />
-              </div>
-            </div>
+            <ImageFrame
+              frameClass="h-full w-full rounded-full"
+              firstOrbitClass="absolute ml-5 mt-5 h-6/7 w-6/7 rounded-full border sm:ml-6 sm:mt-6 md:ml-7 md:mt-7"
+              secondOrbitClass="absolute h-full w-full rounded-full border"
+              thirdOrbitClass="absolute ml-9 mt-9 h-3/4 w-3/4 overflow-hidden rounded-full border md:ml-12 md:mt-12"
+              icon={
+                <InstructorImage2 Class="h-full w-full bg-white pt-3 opacity-80" />
+              }
+            />
           </div>
         </div>
       ) : (
@@ -98,17 +83,13 @@ const InstructorCard = ({ instructor, id }) => {
             }`}
             ref={picRef}
           >
-            <div class="h-full w-full rounded-full">
-              <div class="absolute ml-5 mt-5 h-6/7 w-6/7 rounded-full border border-slate-600 sm:ml-6 sm:mt-6 md:ml-7 md:mt-7 ">
-                <div class="transform-x-2 relative left-1/2 bottom-2 h-3 w-3 animate-rotation rounded-full border bg-yellow-300 transition-all duration-1000"></div>
-              </div>
-              <div class="absolute h-full w-full rounded-full border border-slate-600">
-                <div class="transform-x-2 relative left-1/2 top-[98%] h-3 w-3 rounded-full border bg-yellow-300 transition-all duration-1000 "></div>
-              </div>
-              <div class="absolute ml-9 mt-9 h-3/4 w-3/4 overflow-hidden rounded-full border md:ml-12 md:mt-12">
-                <InstructorImage2 Class="h-full w-full bg-white pt-3" />
-              </div>
-            </div>
+            <ImageFrame
+              frameClass="h-full w-full rounded-full"
+              firstOrbitClass="absolute ml-5 mt-5 h-6/7 w-6/7 rounded-full border border-slate-600 sm:ml-6 sm:mt-6 md:ml-7 md:mt-7"
+              secondOrbitClass="absolute h-full w-full rounded-full border border-slate-600"
+              thirdOrbitClass="absolute ml-9 mt-9 h-3/4 w-3/4 overflow-hidden rounded-full border md:ml-12 md:mt-12"
+              icon={<InstructorImage2 Class="h-full w-full bg-white pt-3" />}
+            />
           </div>
         </div>
       )}

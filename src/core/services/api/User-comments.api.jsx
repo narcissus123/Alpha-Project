@@ -13,7 +13,7 @@ const GetUserComments = async () => {
 const SendUserComments = async (obj) => {
   try {
     const response = await instance.post("/api/comments/send", obj);
-    return response.data;
+    return response;
   } catch (error) {
     return error;
   }

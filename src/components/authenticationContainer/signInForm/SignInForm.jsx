@@ -1,9 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { Input } from "../../common/inputs/profileInput/ProfileInput";
+import { Button } from "../../common/button/Button";
 
 import { SignInStudent } from "../../../core/services/api/Student-authentication.api";
 import { getItem } from "../../../core/services/storage/Storage";
@@ -13,6 +14,9 @@ import { SignInInputData } from "../../../configs/data/signInInputData/SignInInp
 
 // This component renders the form for the user to sign in.
 const SignInForm = () => {
+  /* Rendering spinner while we are waiting for backend response. */
+  const [isLoading, setIsLoading] = useState(false);
+
   const history = useNavigate();
   const auth = useAuth();
 
@@ -29,6 +33,7 @@ const SignInForm = () => {
 
   const onSubmit = async (data) => {
     try {
+      setIsLoading(true);
       const response = await SignInStudent(data);
       if (response.success) {
         toast.success("You are successfully signed in!");
@@ -40,6 +45,7 @@ const SignInForm = () => {
     } catch (error) {
       toast.error(error);
     }
+    setIsLoading(false);
   };
   return (
     <Fragment>
@@ -69,13 +75,14 @@ const SignInForm = () => {
           />
         ))}
 
+        {/* Call to action. */}
         <div class="m-auto mt-2 w-2/4 sm:w-2/6 md:w-3/7 lg:w-1/3">
-          <button
-            class="apearance-none w-full rounded-full border-2 border-customYellow py-1 px-2 text-center text-base text-customYellow hover:border-customYellow hover:bg-customYellow hover:text-white hover:outline-none focus:outline-none"
+          <Button
             type="submit"
-          >
-            Sign In
-          </button>
+            isLoading={isLoading}
+            text="Sign in"
+            Class="apearance-none w-full rounded-full border-2 border-customYellow py-1 px-2 text-center text-base text-customYellow hover:border-customYellow hover:bg-customYellow hover:text-white hover:outline-none focus:outline-none disabled:cursor-default disabled:border-gray-500 disabled:text-gray-500 disabled:hover:bg-slate-200"
+          />
         </div>
       </form>
     </Fragment>

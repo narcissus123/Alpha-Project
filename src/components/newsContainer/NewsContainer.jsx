@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 import { Spinner } from "../common/spinner/Spinner";
 import { Top } from "../layout/contentLayout/top/Top";
@@ -11,31 +11,11 @@ import { getNews } from "../../core/services/api/News.api";
 import { sortNews } from "../../core/utils/Sort";
 import { itemsRange } from "../../core/utils/paginate";
 import { filter, NewsSearchBasedFilter } from "../../core/utils/Filter";
+import { useFetch } from "../../hooks/useFetch";
 
 // This component renders news and articles.
 const NewsContainer = () => {
-  /* Rendering spinner while we are waiting for backend response. */
-  const [isLoading, setIsLoading] = useState(true);
-
-  /* Saving news information sent from backend. */
-  const [newsInfo, setNewsInfo] = useState([]);
-
-  const getAllNews = async () => {
-    try {
-      const data = await getNews();
-      if (data.success) {
-        setNewsInfo(data.result);
-        setIsLoading(false);
-      }
-    } catch (error) {
-      //toast.error("Sorry! There is a problem loading news.");
-    }
-  };
-
-  /* Call API to get all news.*/
-  useEffect(() => {
-    getAllNews();
-  }, []);
+  const { isLoading, data } = useFetch(getNews);
 
   /* Getting current page from pagination component */
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,7 +23,7 @@ const NewsContainer = () => {
 
   /* Filter courses based on search input */
   const [searchedNews, setSearchedNews] = useState("");
-  let filteredData = filter(newsInfo, searchedNews, NewsSearchBasedFilter);
+  let filteredData = filter(data, searchedNews, NewsSearchBasedFilter);
 
   /* Calculating the first and last items of the current page */
   let [firstItem, lastItem] = itemsRange(
@@ -57,7 +37,7 @@ const NewsContainer = () => {
   const sortPathNameHandler = (pathName) => {
     if (pathName === "News") {
       history("/news?sort=" + pathName);
-    } else if (pathName === "Article") {
+    } else if (pathName === "article") {
       history("/news?sort=" + pathName);
     }
   };
@@ -77,7 +57,7 @@ const NewsContainer = () => {
         }}
         placeholder="Search by News title"
         setSortPathName={sortPathNameHandler}
-        category={["News", "Article"]}
+        category={["News", "article"]}
         sortPlaceHolder="Sort News"
         sort={true}
       />

@@ -1,8 +1,9 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 
 import { ErrorMessages } from "../../common/messages/errorMessage/ErrorMessages";
+import { Button } from "../../common/button/Button";
 
 import { useAuth } from "../../../context/AuthContext";
 import { SendUserComments } from "../../../core/services/api/User-comments.api";
@@ -11,6 +12,9 @@ import { getItem } from "../../../core/services/storage/Storage";
 // This component renders the form on the target news page for the user to comment on that news.
 const NewsForm = ({ param }) => {
   const auth = useAuth();
+
+  /* Rendering spinner while we are waiting for backend response. */
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -33,6 +37,7 @@ const NewsForm = ({ param }) => {
           comment: data.comment,
         };
 
+        setIsLoading(true);
         const response = await SendUserComments(userComment);
 
         if (response.status == 200) {
@@ -42,6 +47,7 @@ const NewsForm = ({ param }) => {
     } catch (error) {
       toast.error("Sorry! Something went wrong.");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -82,12 +88,12 @@ const NewsForm = ({ param }) => {
             </div>
             <ErrorMessages name="comment" errors={errors} />
             {/* Call to action. */}
-            <button
+            <Button
               type="submit"
-              class="mt-4 block items-center rounded-lg border border-customGreen py-2.5 px-4 text-center text-sm font-medium text-customGreen hover:border-customGreen focus:border-customGreen focus:outline-none "
-            >
-              Post comment
-            </button>
+              isLoading={isLoading}
+              text="Post comment"
+              Class="mt-4 block items-center rounded-lg border border-customGreen py-2.5 px-4 text-center text-sm font-medium text-customGreen focus:border-customGreen focus:outline-none"
+            />
           </form>
         </div>
       </section>

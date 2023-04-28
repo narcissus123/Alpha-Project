@@ -4,32 +4,14 @@ import { CourseCart } from "./courseCart/CourseCart";
 import { Spinner } from "../../common/spinner/Spinner";
 
 import { getCourses } from "../../../core/services/api/Courses.api";
+import { useFetch } from "../../../hooks/useFetch";
 
 import { LeftArrowImage, RightArrowImage } from "../../../assets/svg/Svg";
 
 // This component renders a carousel. Each item of carousel renders a course detail and leads user to that course page for more information.
 const CoursesIntroSection = () => {
-  /* Rendering spinner while we are waiting for backend response. */
-  const [isLoading, setIsLoading] = useState(true);
-
-  /* Saving courses information sent from backend. */
-  const [courseInfo, setCourseInfo] = useState([]);
-
-  const getAllCourses = async () => {
-    try {
-      const data = await getCourses();
-
-      if (data.success) {
-        setCourseInfo(data.result);
-        setIsLoading(false);
-      }
-    } catch (error) {}
-  };
-
-  /* Call API to get all courses. */
-  useEffect(() => {
-    getAllCourses();
-  }, []);
+  /* Call API to get courses.*/
+  const { isLoading, data } = useFetch(getCourses);
 
   const [curr, setCurr] = useState(0);
   const prev = () => setCurr((curr) => (curr <= 0 ? 0 : curr - 1 / 5));
@@ -48,7 +30,7 @@ const CoursesIntroSection = () => {
             class={`relative left-0 flex h-screen w-5screen flex-row transition-transform duration-[3s] ease-out`}
           >
             {/* Items inside the gallery. */}
-            {courseInfo.slice(0, 5).map((program, index) => (
+            {data.slice(0, 5).map((program, index) => (
               <div class="relative h-screen w-screen text-white" key={index}>
                 <CourseCart program={program} />
               </div>

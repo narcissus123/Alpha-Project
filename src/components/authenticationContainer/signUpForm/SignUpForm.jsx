@@ -1,15 +1,19 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer } from "react-toastify";
 
 import { SignUpStudent } from "../../../core/services/api/Student-authentication.api";
 import { CustomDatePicker } from "../../common/customDatePicker/CustomDatePicker";
 import { Input } from "../../common/inputs/profileInput/ProfileInput";
+import { Button } from "../../common/button/Button";
 
 import { SignUpInputData } from "../../../configs/data/signUpInputData/SignUpInputData";
 
 // This component renders the form for the user to sign up. It is the default form in the login page.
 const SignUpForm = ({ handleMessage, setIsSignedup }) => {
+  /* Rendering spinner while we are waiting for backend response. */
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     control,
     register,
@@ -20,6 +24,7 @@ const SignUpForm = ({ handleMessage, setIsSignedup }) => {
   const onSubmit = async (data) => {
     try {
       data["phoneNumber"] = JSON.stringify(data.phoneNumber);
+      setIsLoading(true);
       const response = await SignUpStudent(data);
 
       if (response.success) {
@@ -38,6 +43,7 @@ const SignUpForm = ({ handleMessage, setIsSignedup }) => {
     } catch (error) {
       handleMessage(error, false);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -90,16 +96,12 @@ const SignUpForm = ({ handleMessage, setIsSignedup }) => {
         })}
         {/* Call to action. */}
         <div class="m-auto mt-1 w-3/6 sm:w-2/6 md:mt-2 md:w-3/12 lg:w-1/5 ">
-          <button
-            class="apearance-none w-full rounded-full border-2 border-customYellow py-1 px-2 text-center text-base text-customYellow hover:border-customYellow hover:bg-customYellow hover:text-white hover:outline-none focus:outline-none disabled:cursor-default disabled:border-gray-500 disabled:text-gray-500 disabled:hover:bg-slate-200"
+          <Button
             type="submit"
-            disabled={isSubmitting}
-          >
-            {isSubmitting && (
-              <span className="spinner-border spinner-border-sm mr-1"></span>
-            )}
-            Sign Up
-          </button>
+            isLoading={isLoading}
+            text="Sign up"
+            Class="apearance-none w-full rounded-full border-2 border-customYellow py-1 px-2 text-center text-base text-customYellow hover:border-customYellow hover:bg-customYellow hover:text-white hover:outline-none focus:outline-none disabled:cursor-default disabled:border-gray-500 disabled:text-gray-500 disabled:hover:bg-slate-200"
+          />
         </div>
       </form>
     </Fragment>

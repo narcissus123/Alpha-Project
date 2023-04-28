@@ -1,8 +1,9 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 
 import { ErrorMessages } from "../../common/messages/errorMessage/ErrorMessages";
+import { Button } from "../../common/button/Button";
 
 import { useAuth } from "../../../context/AuthContext";
 import { getUserComment } from "../../../core/services/api/ContactUs.api";
@@ -11,6 +12,9 @@ import { getItem } from "../../../core/services/storage/Storage";
 // This component renders a form for user to send an email to institute.
 const ContactForm = () => {
   const auth = useAuth();
+
+  /* Rendering spinner while we are waiting for backend response. */
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -25,6 +29,7 @@ const ContactForm = () => {
       text: data.text,
     };
     try {
+      setIsLoading(true);
       const response = await getUserComment(commentObj);
       if (response.success) {
         toast.success("You are successfully signed in!");
@@ -34,6 +39,7 @@ const ContactForm = () => {
     } catch (error) {
       toast.error(error);
     }
+    setIsLoading(false);
   };
   return (
     <Fragment>
@@ -81,12 +87,12 @@ const ContactForm = () => {
             <ErrorMessages name="text" errors={errors} />
 
             {/* Submit button. */}
-            <button
+            <Button
               type="submit"
-              class="mt-4 block items-center rounded-lg border border-customGreen py-2.5 px-4 text-center text-sm font-medium text-customGreen hover:border-customGreen focus:border-customGreen focus:outline-none "
-            >
-              Send
-            </button>
+              isLoading={isLoading}
+              text="Send"
+              Class="mt-4 block items-center rounded-lg border border-customGreen py-2.5 px-4 text-center text-sm font-medium text-customGreen focus:border-customGreen focus:outline-none"
+            />
           </form>
         </div>
       </div>
