@@ -1,10 +1,3 @@
-//import from node modules
-//put space in between
-//import our custom components
-//import {functions}
-//import css modules
-//import image
-
 import { Fragment, useEffect } from "react";
 
 import { Auth } from "./auth/Auth";
