@@ -48,6 +48,7 @@ module.exports = {
         customGreen2: "rgb(212, 186, 39)",
         customYellow: "rgba(181, 141, 38, 0.733)",
         customBeige: "#f1f1e6",
+        customBlack: "rgba(0, 0, 0, 0.733)",
       },
       width: {
         "5screen": "500vw",
@@ -115,11 +116,3 @@ module.exports = {
     plugins: [],
   },
 };
-
-/**  @keyframes anim1{
-        0%{
-          transform:rotateZ(0deg);
-        }100%{
-          transform:rotateZ(360deg);
-        }
-      }*/
