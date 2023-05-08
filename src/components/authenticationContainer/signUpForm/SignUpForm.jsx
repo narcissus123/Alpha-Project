@@ -23,10 +23,9 @@ const SignUpForm = ({ handleMessage, setIsSignedup }) => {
 
   const onSubmit = async (data) => {
     try {
-      data["phoneNumber"] = JSON.stringify(data.phoneNumber);
+      data["phoneNumber"] = String(data.phoneNumber);
       setIsLoading(true);
       const response = await SignUpStudent(data);
-
       if (response.success) {
         handleMessage(
           "You are successfully signed up! Please sign in into your acount.",
@@ -42,6 +41,8 @@ const SignUpForm = ({ handleMessage, setIsSignedup }) => {
       }
     } catch (error) {
       handleMessage(error, false);
+      // Log the error to the error reporting service.
+      console.error(error);
     }
     setIsLoading(false);
   };
@@ -58,12 +59,12 @@ const SignUpForm = ({ handleMessage, setIsSignedup }) => {
         class="m-auto flex w-9/12 flex-wrap md:mt-12 md:w-11/12 md:justify-between lg:justify-around"
         onSubmit={handleSubmit(onSubmit)}
       >
-        {SignUpInputData.map((data, index) => {
+        {SignUpInputData.map((data) => {
           return (
             <Fragment>
               {data.name === "birthDate" ? (
                 <CustomDatePicker
-                  key={index}
+                  key={data.id}
                   name={data.name}
                   control={control}
                   rules={data.register.schema}
@@ -76,10 +77,11 @@ const SignUpForm = ({ handleMessage, setIsSignedup }) => {
                 />
               ) : (
                 <Input
+                  key={data.id}
                   frameClass={data.frameClass}
                   inputClass={data.inputClass}
                   labelClass={data.labelClass}
-                  index={index}
+                  index={data.id}
                   children={data.children}
                   placeholder={data.placeholder}
                   type={data.type}
