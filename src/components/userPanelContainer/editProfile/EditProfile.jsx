@@ -43,9 +43,6 @@ const EditProfile = () => {
 
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
-      isSubmitSuccessful
-        ? toast.success("Form is submitted successfully.")
-        : "";
       reset(info);
       reset({ birth: parseISO(info.birthDate) });
     }
@@ -54,30 +51,22 @@ const EditProfile = () => {
   const onSubmit = async (data) => {
     try {
       const birthDate = data.birth;
+
       const { birth, password, ...formatedData } = {
         ...data,
         birthDate,
-        profile: "",
+        phoneNumber: String(data.phoneNumber),
+        profile: "empty.png",
       };
 
-      //  setItem("user", JSON.stringify({ ...info, ...formatedData }));
-
-      /* const newObj = { ...getItem, ...formatedData };
-       */
-
       setIsLoading(true);
-      const response = await updateStudentInfo(
-        info._id,
-        JSON.stringify({ ...getItem, ...formatedData })
-      );
+      const response = await updateStudentInfo(info._id, formatedData);
 
-      if (response.success) {
-        // setItem({ ...info, ...formatedData  }); //should I get from the backend or is it okay to change the setItem like this?
-
+      if (response.status === 200) {
+        setItem("user", JSON.stringify({ ...info, ...formatedData }));
         toast.success("Your information has been updated successfully!");
-        // auth.login(Boolean(getItem("user")) === true);
-
-        //history("/logout");
+      } else {
+        toast.error("Sorry. Something went wrong. Please try later.");
       }
     } catch (error) {
       toast.error(error);
