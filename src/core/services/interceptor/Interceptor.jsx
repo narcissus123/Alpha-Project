@@ -30,12 +30,12 @@ instance.interceptors.response.use(
 );
 
 //Request interceptor
-axios.interceptors.request.use(
+instance.interceptors.request.use(
   (config) => {
     //Setting token before request is sent
     const token = getItem("token");
     if (token) {
-      config.headers["token"] = token;
+      config.headers["x-auth-token"] = token;
     }
     return config;
   },
