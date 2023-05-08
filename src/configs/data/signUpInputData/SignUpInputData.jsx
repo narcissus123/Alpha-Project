@@ -1,5 +1,6 @@
 const SignUpInputData = [
   {
+    id: 1,
     frameClass: "mb-4 w-full md:w-4/9 lg:w-3/7",
     inputClass:
       "linear-tight focus:shadow-outline w-full appearance-none rounded-lg border border-customGreen py-1 px-1 text-gray-700 focus:outline-none",
@@ -25,6 +26,7 @@ const SignUpInputData = [
     },
   },
   {
+    id: 2,
     frameClass: "mb-4 w-full md:w-4/9 lg:w-3/7",
     inputClass:
       "linear-tight focus:shadow-outline w-full appearance-none rounded-lg border border-customGreen py-1 px-1 text-gray-700 focus:outline-none",
@@ -42,6 +44,7 @@ const SignUpInputData = [
     },
   },
   {
+    id: 3,
     frameClass: "mb-4 w-full md:w-4/9 lg:w-3/7",
     inputClass:
       "linear-tight focus:shadow-outline w-full appearance-none rounded-lg border border-customGreen py-1 px-1 text-gray-700 focus:outline-none",
@@ -63,6 +66,7 @@ const SignUpInputData = [
     },
   },
   {
+    id: 4,
     frameClass: "mb-4 w-full md:w-4/9 lg:w-3/7",
     inputClass:
       "linear-tight focus:shadow-outline w-full appearance-none rounded-lg border border-customGreen py-1 px-1 text-gray-700 focus:outline-none",
@@ -89,6 +93,7 @@ const SignUpInputData = [
     },
   },
   {
+    id: 5,
     frameClass: "mb-4 w-full md:w-4/9 lg:w-3/7",
     inputClass:
       "linear-tight focus:shadow-outline w-full appearance-none rounded-lg border border-customGreen py-1 px-1 text-gray-700 focus:outline-none",
@@ -114,6 +119,7 @@ const SignUpInputData = [
     },
   },
   {
+    id: 6,
     frameClass:
       " mb-4 w-full md:w-4/9 lg:w-3/7 text-xs font-bold uppercase tracking-wide text-gray-700",
     labelClass:
