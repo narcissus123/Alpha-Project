@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Input } from "../../common/inputs/profileInput/ProfileInput";
 import { Button } from "../../common/button/Button";
+import { ForgetPasswordModal } from "./forgetPasswordModal/ForgetPasswordModal";
 
 import { SignInStudent } from "../../../core/services/api/Student-authentication.api";
 import { getItem } from "../../../core/services/storage/Storage";
@@ -14,6 +15,8 @@ import { SignInInputData } from "../../../configs/data/signInInputData/SignInInp
 
 // This component renders the form for the user to sign in.
 const SignInForm = () => {
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+
   /* Rendering spinner while we are waiting for backend response. */
   const [isLoading, setIsLoading] = useState(false);
 
@@ -44,6 +47,8 @@ const SignInForm = () => {
       }
     } catch (error) {
       toast.error(error);
+      // Log the error to the error reporting service.
+      console.error(error);
     }
     setIsLoading(false);
   };
@@ -75,8 +80,14 @@ const SignInForm = () => {
           />
         ))}
 
+        <button class="text-sm" onClick={() => setPasswordModalOpen(true)}>
+          Forgot your password?{" "}
+        </button>
+        {passwordModalOpen && (
+          <ForgetPasswordModal setPasswordModalOpen={setPasswordModalOpen} />
+        )}
         {/* Call to action. */}
-        <div class="m-auto mt-2 w-2/4 sm:w-2/6 md:w-3/7 lg:w-1/3">
+        <div class="m-auto mt-8 w-2/4 sm:w-2/6 md:w-3/7 lg:w-1/3">
           <Button
             type="submit"
             isLoading={isLoading}
