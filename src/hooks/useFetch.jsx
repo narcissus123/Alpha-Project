@@ -19,7 +19,8 @@ export const useFetch = (request, ...rest) => {
         setIsLoading(false);
       }
     } catch (error) {
-      //toast.error(errorMessage);
+      // Log the error to the error reporting service.
+      console.error(error);
     }
   };
 
