@@ -1,5 +1,7 @@
 import { instance } from "../interceptor/Interceptor";
 
+import { getItem } from "../storage/Storage";
+
 const getCourses = async () => {
   try {
     const response = await instance.get("/api/course/getall");
@@ -29,26 +31,27 @@ const getCoursesByPage = async (pagenumber, pagesize) => {
   }
 };
 
-const addCourse = async (userId) => {
+const addCourse = async (selectedCourse, userId) => {
   try {
     const response = await instance.post(
-      `/api/course/addStudentToCourse/643a0e20bfbd6ee8cde99bea`,
+      `/api/course/addStudentToCourse/${userId}`,
       {
-        courseId: "63540459ca5b756ac5d89fa4",
+        courseId: selectedCourse,
       }
     );
+
     return response;
   } catch (error) {
     return error;
   }
 };
 
-const deleteCourse = async (courseId, userId) => {
+const deleteCourse = async (selectedCourse, userId) => {
   try {
     const response = await instance.post(
       `/api/course/removeStudentFromCourse/${userId}`,
       {
-        courseId,
+        courseId: selectedCourse,
       }
     );
     return response;
