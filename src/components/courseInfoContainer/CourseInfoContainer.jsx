@@ -1,10 +1,9 @@
 import { Fragment } from "react";
+import { useParams } from "react-router-dom";
 
 import { AboutCourse } from "./aboutCourse/AboutCourse";
 import { CommentForm } from "./commentForm/CommentForm";
 import { CourseComments } from "./courseComments/CourseComments";
-
-import { useParams } from "react-router-dom";
 
 // This component renders different sections of target course page. It includes information about the course, a form to submit comment
 // about the course and a section to see others comments about the course.
