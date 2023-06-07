@@ -11,7 +11,7 @@ import { getItem } from "../../../core/services/storage/Storage";
 
 // This component renders the form on the target news page for the user to comment on that news.
 const NewsForm = ({ param }) => {
-  const auth = useAuth();
+  const user = useAuth();
 
   /* Rendering spinner while we are waiting for backend response. */
   const [isLoading, setIsLoading] = useState(false);
@@ -24,16 +24,16 @@ const NewsForm = ({ param }) => {
 
   const onSubmit = async (data) => {
     try {
-      const user = JSON.parse(getItem("user"));
+      const userInfo = JSON.parse(getItem("user"));
 
       /* Prevent users from commenting if they are not logged in */
-      if (!auth.isUser) {
+      if (!user.isStudent) {
         toast("To post a comment, please log in to your account.");
       } else {
         const userComment = {
           postId: param.newsId,
-          email: user.email,
-          username: user.fullName,
+          email: userInfo.email,
+          username: userInfo.fullName,
           comment: data.comment,
         };
 
