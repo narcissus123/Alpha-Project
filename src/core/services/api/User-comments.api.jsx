@@ -19,4 +19,34 @@ const SendUserComments = async (obj) => {
   }
 };
 
-export { GetUserComments, SendUserComments };
+const sendCommentAnswer = async (commentId, answer) => {
+  try {
+    const response = await instance.post("api/comments/answer", {
+      id: commentId,
+      answer: answer,
+    });
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+const sendCommentVerification = async (commentId) => {
+  try {
+    const response = await instance.post("/api/comments/verify", {
+      id: commentId,
+    });
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export {
+  GetUserComments,
+  SendUserComments,
+  sendCommentAnswer,
+  sendCommentVerification,
+};
