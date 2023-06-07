@@ -29,7 +29,9 @@ const LandingSection = () => {
       <>
         <li class="flex cursor-pointer flex-row items-center gap-3 text-left hover:text-[#747bff]">
           <img src={item.image} class="w-10" />
-          <span>Course: {item.name}</span>
+          <span style={{ display: "block", textAlign: "left", zIndex: "80" }}>
+            Course: {item.name}
+          </span>
         </li>
       </>
     );
@@ -48,8 +50,11 @@ const LandingSection = () => {
             person and online.
           </p>
         </div>
-        <div class="z-30 mx-auto w-72 lg:w-80">
+        <div class="z-50 mx-auto block w-72 lg:w-80">
           <ReactSearchAutocomplete
+            inputProps={{
+              style: { border: "1px solid red" },
+            }}
             placeholder="Search course name here"
             items={items}
             onSelect={handleOnSelect}
