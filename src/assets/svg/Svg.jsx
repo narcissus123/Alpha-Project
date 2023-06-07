@@ -395,8 +395,8 @@ export const LogoImage = ({ Class }) => {
       fill="currentColor"
       strokeWidth="0"
       viewBox="0 0 16 16"
-      height="2.5rem"
-      width="2.5rem"
+      height="2.1rem"
+      width="2.1rem"
       xmlns="http://www.w3.org/2000/svg"
       className={Class}
     >
@@ -479,6 +479,41 @@ export const InstructorImage2 = ({ Class }) => {
       class={Class}
     >
       <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm95.8 32.6L272 480l-32-136 32-56h-96l32 56-32 136-47.8-191.4C56.9 292 0 350.3 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-72.1-56.9-130.4-128.2-133.8z"></path>
+    </svg>
+  );
+};
+
+export const UserChatImage = ({ Class }) => {
+  return (
+    <svg
+      stroke="currentColor"
+      fill="currentColor"
+      stroke-width="0"
+      viewBox="0 0 496 512"
+      height="1em"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+      class={Class}
+    >
+      <path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"></path>
+    </svg>
+  );
+};
+
+export const ChatImage = ({ Class }) => {
+  return (
+    <svg
+      stroke="currentColor"
+      fill="currentColor"
+      stroke-width="0"
+      viewBox="0 0 512 512"
+      height="2rem"
+      width="1.5rem"
+      xmlns="http://www.w3.org/2000/svg"
+      class={Class}
+    >
+      <path d="M132.8 368c-20.2 0-44.8-24.6-44.8-44.8V160h-9.6C61.7 160 48 173.7 48 190.4V464l58.5-58h215.1c16.7 0 30.4-14.1 30.4-30.9V368H132.8z"></path>
+      <path d="M429.1 48H149.9C130.7 48 115 63.7 115 82.9V309c0 19.2 15.7 35 34.9 35h238.2l75.9 53V82.9c0-19.2-15.7-34.9-34.9-34.9z"></path>
     </svg>
   );
 };
@@ -621,6 +656,116 @@ export const SortingUpArrowImage = ({ Class }) => {
       class={Class}
     >
       <path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z"></path>
+    </svg>
+  );
+};
+
+export const CommentReplyImage = () => {
+  return (
+    <svg
+      aria-hidden="true"
+      class="mr-1 h-4 w-4"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+      ></path>
+    </svg>
+  );
+};
+
+export const AdminImage = () => {
+  return (
+    <svg
+      stroke="currentColor"
+      fill="currentColor"
+      strokeWidth="0"
+      viewBox="0 0 24 24"
+      height="3rem"
+      width="3rem"
+      xmlns="http://www.w3.org/2000/svg"
+      class="mr-4 rounded-full border border-slate-800 p-1"
+    >
+      <g>
+        <path fill="none" d="M0 0h24v24H0z"></path>
+        <path d="M3.783 2.826L12 1l8.217 1.826a1 1 0 0 1 .783.976v9.987a6 6 0 0 1-2.672 4.992L12 23l-6.328-4.219A6 6 0 0 1 3 13.79V3.802a1 1 0 0 1 .783-.976zM12 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm-4.473 5h8.946a4.5 4.5 0 0 0-8.946 0z"></path>
+      </g>
+    </svg>
+  );
+};
+
+export const AdminChatImage = ({ Class }) => {
+  return (
+    <svg
+      stroke="currentColor"
+      fill="currentColor"
+      strokeWidth="0"
+      viewBox="0 0 24 24"
+      height="3.5rem"
+      width="3.5rem"
+      xmlns="http://www.w3.org/2000/svg"
+      class={Class}
+    >
+      <g>
+        <path fill="none" d="M0 0h24v24H0z"></path>
+        <path d="M3.783 2.826L12 1l8.217 1.826a1 1 0 0 1 .783.976v9.987a6 6 0 0 1-2.672 4.992L12 23l-6.328-4.219A6 6 0 0 1 3 13.79V3.802a1 1 0 0 1 .783-.976zM12 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm-4.473 5h8.946a4.5 4.5 0 0 0-8.946 0z"></path>
+      </g>
+    </svg>
+  );
+};
+
+export const SendImage = ({ Class }) => {
+  return (
+    <svg
+      stroke="currentColor"
+      fill="currentColor"
+      stroke-width="0"
+      viewBox="0 0 24 24"
+      height="1.5rem"
+      width="1.5rem"
+      xmlns="http://www.w3.org/2000/svg"
+      class={Class}
+    >
+      <path d="M21.426,11.095l-17-8c-0.35-0.163-0.763-0.112-1.061,0.133C3.066,3.473,2.937,3.868,3.03,4.242L4.969,12L3.03,19.758	c-0.094,0.374,0.036,0.77,0.335,1.015C3.548,20.923,3.772,21,4,21c0.145,0,0.29-0.031,0.426-0.095l17-8	C21.776,12.74,22,12.388,22,12S21.776,11.26,21.426,11.095z M5.481,18.197L6.32,14.84L12,12L6.32,9.16L5.481,5.803L18.651,12	L5.481,18.197z"></path>
+    </svg>
+  );
+};
+
+export const VerifyCommentImage = () => {
+  return (
+    <svg
+      stroke="currentColor"
+      fill="currentColor"
+      stroke-width="0"
+      viewBox="0 0 16 16"
+      height="1.5rem"
+      width="1.5rem"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M15.67 7.066l-1.08-1.34a1.5 1.5 0 0 1-.309-.77l-.19-1.698a1.51 1.51 0 0 0-1.329-1.33l-1.699-.19c-.3-.03-.56-.159-.78-.329L8.945.33a1.504 1.504 0 0 0-1.878 0l-1.34 1.08a1.5 1.5 0 0 1-.77.31l-1.698.19c-.7.08-1.25.63-1.33 1.329l-.19 1.699c-.03.3-.159.56-.329.78L.33 7.055a1.504 1.504 0 0 0 0 1.878l1.08 1.34c.17.22.28.48.31.77l.19 1.698c.08.7.63 1.25 1.329 1.33l1.699.19c.3.03.56.159.78.329l1.339 1.08c.55.439 1.329.439 1.878 0l1.34-1.08c.22-.17.48-.28.77-.31l1.698-.19c.7-.08 1.25-.63 1.33-1.329l.19-1.699c.03-.3.159-.56.329-.78l1.08-1.339a1.504 1.504 0 0 0 0-1.878zM6.5 12.01L3 8.51l1.5-1.5 2 2 5-5L13 5.56l-6.5 6.45z"
+      ></path>
+    </svg>
+  );
+};
+
+export const ThreeDotMenuImage = () => {
+  return (
+    <svg
+      class=" h-5 w-5"
+      aria-hidden="true"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
     </svg>
   );
 };
