@@ -11,6 +11,8 @@ const Config = {
     shoppingCartPage: "/cart",
     registerationPage: "/login",
     userProfilePage: "/profile",
+    adminAccess: "/admin",
+    adminLogoutPage: "/adminLogout",
     pageNotFound: "*",
     logOutPage: "/logout",
   },

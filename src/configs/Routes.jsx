@@ -11,6 +11,8 @@ import { Authentication } from "../screens/authentication/Authentication";
 import { PageNotFound } from "../screens/pageNotFound/PageNotFound";
 import { UserPanel } from "../screens/panel/UserPanel";
 import { Logout } from "../screens/logout/Logout";
+import { Admin } from "../screens/admin/Admin";
+import { AdminLogout } from "../screens/adminLogout/AdminLogout";
 
 export const publicRoutes = [
   {
@@ -68,6 +70,18 @@ export const publicRoutes = [
     footer: true,
   },
   {
+    path: Config.ROUTES.adminAccess,
+    element: <Admin />,
+    exact: true,
+    footer: false,
+  },
+  {
+    path: Config.ROUTES.adminLogoutPage,
+    element: <AdminLogout />,
+    exact: true,
+    footer: true,
+  },
+  {
     path: Config.ROUTES.registerationPage,
     element: <Authentication />,
     exact: true,
@@ -80,6 +94,15 @@ export const publicRoutes = [
     footer: true,
   },
 ];
+// adminSigninPage: "/adminSignin",
+// adminSignoutPage: "/adminSignout",
+
+// {
+//   path: Config.ROUTES.adminAccess,
+//   element: <Admin />,
+//   exact: true,
+//   footer: true,
+// },
 
 export const privateRoutes = [
   {
@@ -139,6 +162,18 @@ export const privateRoutes = [
   {
     path: Config.ROUTES.userProfilePage,
     element: <UserPanel />,
+    exact: true,
+    footer: true,
+  },
+  {
+    path: Config.ROUTES.adminAccess,
+    element: <Admin />,
+    exact: true,
+    footer: false,
+  },
+  {
+    path: Config.ROUTES.adminLogoutPage,
+    element: <AdminLogout />,
     exact: true,
     footer: true,
   },
