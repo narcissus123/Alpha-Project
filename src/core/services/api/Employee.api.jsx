@@ -9,4 +9,13 @@ const getInstructors = async () => {
   }
 };
 
-export { getInstructors };
+const getAdminById = async (adminId) => {
+  try {
+    const response = await instance.get(`/api/employee/${adminId}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export { getInstructors, getAdminById };
