@@ -1,55 +1,60 @@
+import { useState, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
 import { AlertMessage } from "../../common/messages/alertMessage/AlertMessage";
 import { CommentCard } from "./commentCard/CommentCard";
 
-import { FilterValidComments } from "../../../core/utils/Filter";
+import {
+  FilterValidComments,
+  FilterUnrelatedComments,
+} from "../../../core/utils/Filter";
 import { getAllComments } from "../../../core/services/api/comments.api";
 import { useFetch } from "../../../hooks/useFetch";
+import { useAuth } from "../../../context/AuthContext";
 
 // This component renders users comments about the course in the course page and displays the admin responses to users comments.
 const CourseComments = ({ param }) => {
+  const admin = useAuth();
+  console.log(admin.isAdmin);
   const { data } = useFetch(getAllComments);
 
-  const filteredComments = data; //FilterValidComments(data, param.programId); //Filtering unverified comments
+  const [comments, setComments] = useState([]);
+  useEffect(() => {
+    const filteredComments = admin.isAdmin
+      ? FilterUnrelatedComments(data, param.programId)
+      : FilterValidComments(data, param.programId); //Filtering unverified comments
+    setComments(filteredComments);
+  }, [data]);
 
   return (
-    <section class="opacity-3 w-screen bg-white py-8 lg:py-16">
+    <section class="opacity-3 flex w-screen justify-center bg-white py-8 lg:py-8">
       <ToastContainer />
-      {filteredComments != [] ? (
-        <div class="ml-8 flex max-w-6xl flex-col border-t border-customGreen2 px-4">
+      {comments != [] ? (
+        <div class="flex max-w-4xl flex-col justify-center px-4">
           <>
             {/* Title */}
             <div class="mb-6">
-              <h2 class="py-4 text-lg font-bold text-customGreen2 dark:text-white lg:text-2xl">
-                Discussion ({filteredComments.length})
+              <h2 class="border-b border-customGreen2 py-4 text-lg font-bold text-customGreen2 dark:text-white lg:text-2xl">
+                Discussion ({comments.length})
               </h2>
             </div>
             {/* This section displays verified commnets and admit response to those comments if there is any. */}
-            {filteredComments.map((comm, index) => (
+            {comments.map((comm, index) => (
               <>
                 <CommentCard
-                  Class={"w-2/3"}
+                  //Class={"w-2/3"}
                   comment={comm}
                   answer={false}
                   key={comm._id}
+                  setComments={setComments}
                 />
-                {comm.answer ? (
+                {comm.answer && (
                   <CommentCard
                     key={index}
-                    Class={"ml-[6.5%] w-3/5"}
+                    Class={"ml-[6.5%] "}
                     comment={comm}
                     answer={true}
                   />
-                ) : (
-                  comm.answer === undefined && (
-                    <AlertMessage
-                      message="No replies."
-                      Class={
-                        " py-2 text-base border ml-[6.5%] w-3/5 rounded-lg mb-8 text-gray-600 text-left"
-                      }
-                    />
-                  )
                 )}
               </>
             ))}
