@@ -24,9 +24,9 @@ const AboutNews = ({ param }) => {
         </p>
       ) : (
         <div class="flex h-auto w-screen flex-row justify-center overflow-hidden border-t bg-white py-12 text-gray-700">
-          <ul class="flex h-full w-1/2  flex-col justify-center pl-10 text-base md:text-lg">
+          <ul class="flex h-full w-1/2  flex-col justify-center pl-10 text-base md:text-base">
             <li>
-              <span class="block text-4xl md:text-[2.75rem]">{data.title}</span>
+              <span class="block text-2xl md:text-[2.75rem]">{data.title}</span>
             </li>
             <li>
               <hr class="my-5 w-1/2 border border-customGreen2"></hr>
@@ -37,9 +37,7 @@ const AboutNews = ({ param }) => {
             </li>
             <li class="mb-3">
               <span>News: </span>
-              <p class="h-[32rem] overflow-y-auto text-slate-500  ">
-                {data.text}
-              </p>
+              <p class="h-[32rem]  text-slate-500  ">{data.text}</p>
             </li>
           </ul>
 
