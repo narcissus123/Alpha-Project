@@ -11,7 +11,7 @@ import { useAuth } from "../../../context/AuthContext";
 
 // This component renders the form on the target course page for the user to comment on that course.
 const CommentForm = ({ param }) => {
-  const auth = useAuth();
+  const user = useAuth();
 
   /* Rendering spinner while we are waiting for backend response. */
   const [isLoading, setIsLoading] = useState(false);
@@ -27,9 +27,11 @@ const CommentForm = ({ param }) => {
       const user = JSON.parse(getItem("user"));
 
       /* Prevent users from commenting if they are not logged in */
-      if (!auth.isUser) {
-        toast("To post a comment, please log in to your account.");
-      } else {
+      if (!user.isStudent || !user.isAdmin) {
+        toast.error("To post a comment, please log in to your account.");
+      } else if (user.isAdmin) {
+        toast.error("Only Students can leave a comment.");
+      } else if (user.isStudent) {
         const userComment = {
           postId: param.programId,
           email: user.email,
@@ -50,9 +52,9 @@ const CommentForm = ({ param }) => {
 
   return (
     <Fragment>
-      <section class="w-screen border-t bg-white py-8 lg:py-40">
+      <section class="w-screen bg-white py-10 pt-16 ">
         <ToastContainer />
-        <div class="lg:ml-15 ml-0 flex max-w-lg flex-col rounded-lg border border-customGreen px-4 sm:ml-6 sm:max-w-xl md:ml-10 md:max-w-2xl lg:max-w-4xl">
+        <div class="lg:ml-15 ml-0 flex max-w-lg flex-col rounded-lg border border-customGreen px-4 drop-shadow-sm sm:ml-6 sm:max-w-xl md:ml-10 md:max-w-2xl lg:max-w-4xl">
           {/* Title */}
           <div class="mb-2 mt-6">
             <h2 class="text-2xl font-bold text-gray-900 lg:text-2xl">
