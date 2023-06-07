@@ -1,6 +1,8 @@
 import axios from "axios";
 import { getItem } from "../storage/Storage";
 import { Config } from "../../../configs/Config";
+import { useAuth } from "../../../context/AuthContext";
+
 const baseURL = Config.baseUrl;
 
 const instance = axios.create({
@@ -28,12 +30,15 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
+//const user = useAuth();
 //Request interceptor
 instance.interceptors.request.use(
   (config) => {
+    //
+
     //Setting token before request is sent
     const token = getItem("token");
+    console.log("token:", token);
     if (token) {
       config.headers["x-auth-token"] = token;
     }
@@ -46,3 +51,8 @@ instance.interceptors.request.use(
 );
 
 export { instance };
+
+// const user = useAuth();
+
+//     //Setting token before request is sent
+//     const token = user.isAdmin ? getItem("adminToken") : getItem("token");
