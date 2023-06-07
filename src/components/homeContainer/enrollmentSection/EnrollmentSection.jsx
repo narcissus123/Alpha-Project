@@ -13,7 +13,7 @@ const EnrollmentSection = () => {
   const { picRef, show } = UseComponentIntoView();
 
   return (
-    <div class="flex h-[47rem] w-auto flex-row overflow-hidden bg-white text-center opacity-70">
+    <div class="z-20 flex h-[47rem] w-auto flex-row overflow-hidden bg-white text-center opacity-70">
       <div class="flex h-full w-1/2 flex-col justify-center space-y-10 self-center text-lg md:space-y-16">
         <h1 class="text-3xl font-medium text-customGreen2 md:text-4xl">
           Our Reputation
@@ -38,17 +38,17 @@ const EnrollmentSection = () => {
         </span>
         <button
           class={`w-30 mx-auto rounded-full border  bg-white py-1 text-customGreen2 hover:border-transparent  hover:text-white lg:w-40 ${
-            user.isUser
+            user.isStudent || user.isAdmin
               ? "cursor-none border-gray-500 hover:bg-gray-500"
               : "cursor-pointer border-customGreen2 hover:bg-customGreen2"
           }`}
-          disabled={user.isUser}
+          disabled={user.isStudent || user.isAdmin}
         >
           <Link
             class={`block h-full w-full hover:text-white  ${
-              user.isUser ? "text-gray-500 " : "text-customGreen2 "
+              user.isStudent ? "text-customGreen2 " : "text-gray-500 "
             }`}
-            to={user.isUser ? "#" : "/login"}
+            to={user.isStudent || user.isAdmin ? "#" : "/login"}
           >
             Register
           </Link>
