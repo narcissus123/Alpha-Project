@@ -6,6 +6,14 @@ function FilterValidComments(comments, param) {
   return verifiedComments;
 }
 
+function FilterUnrelatedComments(comments, param) {
+  const verifiedComments = comments.filter(
+    (comment) => comment.postId == param
+  );
+
+  return verifiedComments;
+}
+
 function FilterNewsAndPub(data) {
   let news = data.filter((item) => item.category == "news");
   news && (news = news.slice(0, 2));
@@ -43,5 +51,6 @@ export {
   CourseSearchBasedFilter,
   InstructorSearchBasedFilter,
   NewsSearchBasedFilter,
+  FilterUnrelatedComments,
   filter,
 };
