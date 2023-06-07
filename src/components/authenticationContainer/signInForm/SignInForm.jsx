@@ -21,7 +21,7 @@ const SignInForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const history = useNavigate();
-  const auth = useAuth();
+  const user = useAuth();
 
   const {
     register,
@@ -40,7 +40,7 @@ const SignInForm = () => {
       const response = await SignInStudent(data);
       if (response.success) {
         toast.success("You are successfully signed in!");
-        auth.login(Boolean(getItem("user")) === true);
+        user.loginAsStudent(Boolean(getItem("user")) === true);
         history("/home");
       } else {
         toast.error("Something went wrong! Please try again.");
