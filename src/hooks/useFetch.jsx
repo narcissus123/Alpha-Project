@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 export const useFetch = (request, ...rest) => {
   /* Rendering spinner while we are waiting for backend response. */
   const [isLoading, setIsLoading] = useState(true);
