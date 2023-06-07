@@ -11,7 +11,7 @@ import { getItem } from "../../../core/services/storage/Storage";
 
 // This component renders a form for user to send an email to institute.
 const ContactForm = () => {
-  const auth = useAuth();
+  const user = useAuth();
 
   /* Rendering spinner while we are waiting for backend response. */
   const [isLoading, setIsLoading] = useState(false);
@@ -28,18 +28,24 @@ const ContactForm = () => {
       name: JSON.parse(getItem("user")).fullName,
       text: data.text,
     };
-    try {
-      setIsLoading(true);
-      const response = await getUserComment(commentObj);
-      if (response.success) {
-        toast.success("You are successfully signed in!");
-      } else {
-        toast.error("Something went wrong! Please try again.");
+    if (!user.isAdmin && !user.isStudent) {
+      toast.error("You should sign in to submit form.");
+    } else if (user.isAdmin) {
+      toast.error("Only students can submit form.");
+    } else {
+      try {
+        setIsLoading(true);
+        const response = await getUserComment(commentObj);
+        if (response.success) {
+          toast.success("You are successfully signed in!");
+        } else {
+          toast.error("Something went wrong! Please try again.");
+        }
+      } catch (error) {
+        toast.error(error);
       }
-    } catch (error) {
-      toast.error(error);
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
   return (
     <Fragment>
@@ -47,21 +53,19 @@ const ContactForm = () => {
       <div class="h-[24rem] bg-white opacity-70 md:h-[31rem] md:w-1/2">
         <div class="m-auto mt-12 flex  max-w-lg flex-col rounded-lg border border-customGreen px-4 text-black md:mt-[2.7rem] md:max-w-sm lg:max-w-xl">
           {/* Contact us form */}
-          <form
-            class="my-4 mb-6"
-            onSubmit={
-              auth.isUser
-                ? handleSubmit(onSubmit)
-                : toast.error("You should sign in to submit form.")
-            }
-          >
+          <form class="my-4 mb-6" onSubmit={handleSubmit(onSubmit)}>
             <label class="my-2 ml-1 block" forhtml="email">
               Email
             </label>
             <input
               id="email"
               class="mb-2 block w-1/2 rounded-lg border border-gray-200 bg-white py-1.5 px-2 text-gray-900 focus:outline-none focus:ring-0"
-              placeholder="example@domain.com"
+              placeholder={
+                user.isStudent
+                  ? JSON.parse(getItem("user")).email
+                  : "example@domain.com"
+              }
+              disabled={user.isAdmin}
               {...register("email", { required: "This is required." })}
             />
             <ErrorMessages name="email" errors={errors} />
@@ -82,7 +86,8 @@ const ContactForm = () => {
                     message: "Comment cannot be more than 200 words long.",
                   },
                 })}
-              ></textarea>
+                disabled={user.isAdmin}
+              />
             </div>
             <ErrorMessages name="text" errors={errors} />
 
@@ -91,7 +96,13 @@ const ContactForm = () => {
               type="submit"
               isLoading={isLoading}
               text="Send"
-              Class="mt-4 block items-center rounded-lg border border-customGreen py-2.5 px-4 text-center text-sm font-medium text-customGreen focus:border-customGreen focus:outline-none"
+              Class="mt-4 block items-center rounded-lg border border-customGreen py-2.5 px-4 text-center text-sm font-medium text-customGreen focus:border-customGreen focus:outline-none disabled:border-slate-500  disabled:text-slate-500"
+              onClick={() => {
+                !user.isAdmin && !user.isStudent
+                  ? toast.error("You should sign in to submit form.")
+                  : user.isAdmin &&
+                    toast.error("Only students can submit form.");
+              }}
             />
           </form>
         </div>
