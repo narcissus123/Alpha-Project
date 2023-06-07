@@ -42,7 +42,6 @@ const CourseComments = ({ param }) => {
             {comments.map((comm, index) => (
               <>
                 <CommentCard
-                  //Class={"w-2/3"}
                   comment={comm}
                   answer={false}
                   key={comm._id}
