@@ -54,8 +54,4 @@ export const navbarItems = [
     title: "About Us",
     link: "/about-us",
   },
-  {
-    title: "Sign in",
-    link: "/login",
-  },
 ];
