@@ -48,11 +48,6 @@ const UploadImageModal = ({ setOpenImgModal }) => {
           };
 
           const response = await updateStudentInfo(userInfo._id, newUserInfo);
-
-          if (response.status === 200) {
-            setItem("user", JSON.stringify({ ...userInfo, ...newUserInfo }));
-            toast.success("Your profile image has been updated successfully!");
-          }
         } else {
           toast.error("Sorry. Something went wrong.");
         }
@@ -61,7 +56,7 @@ const UploadImageModal = ({ setOpenImgModal }) => {
         toast.error("Please choose image first.");
       }
     } catch (error) {
-      toast.error(error);
+      console.error(error);
       toast.error("Sorry. Something went wrong. Please try later.");
     }
   };
