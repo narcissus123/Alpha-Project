@@ -7,7 +7,7 @@ import { ScrollToTop } from "../core/utils/scrollToTop/ScrollToTop";
 import { useAuth } from "../context/AuthContext";
 
 const App = () => {
-  const auth = useAuth();
+  const user = useAuth();
 
   useEffect(() => {
     window.process = {
@@ -18,7 +18,7 @@ const App = () => {
   return (
     <Fragment>
       <ScrollToTop />
-      {auth.isUser ? <Auth /> : <UnAuth />}
+      {user.isStudent || user.isAdmin ? <Auth /> : <UnAuth />}
     </Fragment>
   );
 };
