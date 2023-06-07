@@ -3,18 +3,36 @@ import { getItem } from "../core/services/storage/Storage";
 
 const AuthContext = createContext(false);
 export const AuthProvider = ({ children }) => {
-  const [isUser, setIsEmployee] = useState(Boolean(getItem("user")) === true);
+  const [isStudent, setIsStudent] = useState(Boolean(getItem("user")) === true);
 
-  const login = (isUser) => {
-    setIsEmployee(isUser);
+  const [isAdmin, setIsAdmin] = useState(Boolean(getItem("admin")) === true);
+  const loginAsStudent = (isStudent) => {
+    setIsStudent(isStudent);
   };
 
-  const logout = (isUser) => {
-    setIsEmployee(isUser);
+  const logout = (isStudent) => {
+    setIsStudent(isStudent);
+  };
+
+  const loginAsAdmin = (isEmployee) => {
+    setIsAdmin(isEmployee);
+  };
+
+  const logoutAdmin = (isEmployee) => {
+    setIsAdmin(isEmployee);
   };
 
   return (
-    <AuthContext.Provider value={{ login, logout, isUser }}>
+    <AuthContext.Provider
+      value={{
+        loginAsStudent,
+        logout,
+        isStudent,
+        loginAsAdmin,
+        logoutAdmin,
+        isAdmin,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
