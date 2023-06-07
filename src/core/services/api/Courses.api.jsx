@@ -1,7 +1,5 @@
 import { instance } from "../interceptor/Interceptor";
 
-import { getItem } from "../storage/Storage";
-
 const getCourses = async () => {
   try {
     const response = await instance.get("/api/course/getall");
