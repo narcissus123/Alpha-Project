@@ -105,7 +105,6 @@ const Table = ({ Columns, isLoading, data, ColumnFilter }) => {
         </table>
         {/* Table footer */}
         <div class="flex h-10 justify-between border-t border-customGreen2  bg-neutral-300 px-6 text-neutral-500 ">
-          
           {/* Displaying current page number */}
           <p class="mt-2 flex justify-center -space-x-px text-sm ">
             Page{"   "}
