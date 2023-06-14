@@ -1,47 +1,120 @@
+import { useState } from "react";
 import dateFormat from "dateformat";
 
-import { UserImage } from "../../../../assets/svg/Svg";
+import { ReplyForm } from "../../replyForm/ReplyForm";
+import { VerifyModal } from "../../modal/VerifyModal";
+
+import { useAuth } from "../../../../context/AuthContext";
+
+import {
+  UserImage,
+  AdminImage,
+  CommentReplyImage,
+  ThreeDotMenuImage,
+} from "../../../../assets/svg/Svg";
 
 // This component renders user comment and admin response/answer to user comment.
-const CommentCard = ({ Class, comment, answer }) => {
+const CommentCard = ({ Class, comment, answer, setComments, allComments }) => {
+  const [openAnswerForm, setOpenAnswerForm] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+  const [openVerifyModal, setOpenVerifyModal] = useState(false);
+  const [isVerified, setIsverified] = useState(comment.verified);
+
+  const user = useAuth();
+
   return (
     <article
       class={`mb-6 h-auto rounded-lg border bg-white p-6 text-base ${Class}`}
     >
-      {/* Post header */}
+      {/* Post header. It includes student name, the date that comment posted and the option for admin to verify comment. */}
 
-      <div class="mb-6 flex flex-wrap items-center justify-start ">
-        <div class="mr-3 inline-flex items-center text-sm text-gray-900 ">
-          {answer ? (
-            <svg
-              stroke="currentColor"
-              fill="currentColor"
-              strokeWidth="0"
-              viewBox="0 0 24 24"
-              height="3rem"
-              width="3rem"
-              xmlns="http://www.w3.org/2000/svg"
-              class="mr-4 rounded-full border border-slate-800 p-1"
-            >
-              <g>
-                <path fill="none" d="M0 0h24v24H0z"></path>
-                <path d="M3.783 2.826L12 1l8.217 1.826a1 1 0 0 1 .783.976v9.987a6 6 0 0 1-2.672 4.992L12 23l-6.328-4.219A6 6 0 0 1 3 13.79V3.802a1 1 0 0 1 .783-.976zM12 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm-4.473 5h8.946a4.5 4.5 0 0 0-8.946 0z"></path>
-              </g>
-            </svg>
-          ) : (
-            <UserImage />
-          )}
+      <div class="relative mb-6 flex flex-wrap items-center justify-between ">
+        <div class="flex flex-wrap items-center justify-start">
+          <div class="mr-3 inline-flex items-center text-sm text-gray-900 ">
+            {answer ? <AdminImage /> : <UserImage />}
 
-          {answer ? "Admin" : comment.username}
+            {answer ? "Admin" : comment.username}
+          </div>
+          <p class="text-sm text-gray-600">
+            <time>{dateFormat(comment.createDate, "mm/dd/yyyy")}</time>
+          </p>
         </div>
-        <p class="text-sm text-gray-600">
-          <time>{dateFormat(comment.createDate, "mm/dd/yyyy")}</time>
-        </p>
+        {/* Menu. Validation option and its modal. */}
+        {!answer && user.isAdmin && (
+          <>
+            <button
+              id="dropdownComment1Button"
+              data-dropdown-toggle="dropdownComment1"
+              class="inline-flex items-center rounded-lg bg-white p-2 text-center text-sm font-medium text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-50 "
+              type="button"
+              onClick={() => setOpenMenu((prev) => !prev)}
+            >
+              <ThreeDotMenuImage />
+              <span class="sr-only">Comment settings</span>
+            </button>
+            <div
+              id="dropdownComment1"
+              class={`shadow z-10 w-36 divide-y divide-gray-100 rounded border bg-white ${
+                openMenu
+                  ? "absolute right-0 top-11 overflow-hidden transition-transform duration-200"
+                  : "hidden"
+              }`}
+            >
+              <ul
+                class="py-1 text-sm text-gray-700 "
+                aria-labelledby="dropdownMenuIconHorizontalButton"
+              >
+                <li>
+                  <button
+                    class={`block w-full py-2 px-4 hover:bg-gray-100 hover:text-[#747bff] ${
+                      isVerified && "cursor-not-allowed"
+                    }`}
+                    onClick={() => setOpenVerifyModal(true)}
+                    disabled={isVerified}
+                  >
+                    Verify
+                  </button>
+                </li>
+              </ul>
+            </div>
+            {openVerifyModal && (
+              <VerifyModal
+                setOpenVerifyModal={setOpenVerifyModal}
+                commentId={comment._id}
+                setIsverified={setIsverified}
+              />
+            )}{" "}
+          </>
+        )}
       </div>
       {/* Post content */}
       <p class="whitespace-wrap h-auto overflow-y-auto text-gray-500">
         {answer ? `Reply: ${comment.answer}` : comment.comment}
       </p>
+      {/* Reply option for admin */}
+      {!answer && user.isAdmin && (
+        <div class="mt-4 flex items-center space-x-4">
+          {openAnswerForm ? (
+            <ReplyForm
+              allComments={allComments}
+              setComments={setComments}
+              studentComment={comment}
+            />
+          ) : (
+            <button
+              type="button"
+              class={`flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 ${
+                !isVerified && "cursor-not-allowed"
+              }`}
+              onClick={() => setOpenAnswerForm(true)}
+              disabled={!isVerified}
+            >
+              <CommentReplyImage />
+              Reply
+            </button>
+          )}
+        </div>
+      )}
     </article>
   );
 };
