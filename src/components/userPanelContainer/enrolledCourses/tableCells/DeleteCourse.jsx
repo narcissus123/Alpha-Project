@@ -3,7 +3,7 @@ import { Fragment, useState } from "react";
 import { DeleteCourseModal } from "../modal/DeleteCourseModal";
 
 // This component renders delete button in the table. This button opens the delete course modal.
-const DeleteCourse = ({ selectedCourse }) => {
+const DeleteCourse = ({ selectedCourse, setRows, rows }) => {
   const [open, setOpen] = useState(false);
 
   //modal
@@ -16,7 +16,12 @@ const DeleteCourse = ({ selectedCourse }) => {
         Delete
       </button>
       {open && (
-        <DeleteCourseModal setOpen={setOpen} selectedCourse={selectedCourse} />
+        <DeleteCourseModal
+          setOpen={setOpen}
+          selectedCourse={selectedCourse}
+          setRows={setRows}
+          rows={rows}
+        />
       )}
     </Fragment>
   );

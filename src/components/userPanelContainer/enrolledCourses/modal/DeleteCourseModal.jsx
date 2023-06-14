@@ -9,7 +9,7 @@ import { getItem } from "../../../../core/services/storage/Storage";
 import { NotifyImage } from "../../../../assets/svg/Svg";
 
 // This component shows the modal. Users should verify that they want to drop the course they selected.
-const DeleteCourseModal = ({ setOpen, selectedCourse }) => {
+const DeleteCourseModal = ({ setOpen, selectedCourse, setRows, rows }) => {
   const [isSubmitting, seIsSubmitting] = useState(false);
 
   const handleCourseRegistration = async () => {
@@ -18,16 +18,24 @@ const DeleteCourseModal = ({ setOpen, selectedCourse }) => {
 
       seIsSubmitting(true);
       const response = await deleteCourse(selectedCourse._id, userInfo._id);
+
       if (response.status === 200) {
-        toast.success("Course successfully has been deleted.");
-        seIsSubmitting(false);
+        const removeDeletedCourse = rows.filter((course) => {
+          return response.data.result.course._id !== course.original._id;
+        });
+
+        const updatedCourseList = removeDeletedCourse.map((course) => {
+          return course.original;
+        });
+        setRows(updatedCourseList);
+        toast.success("Course deleted successfully.");
       }
 
       if (response.status === 401) {
         toast.error("you are logged out of your account. Please log in again.");
-        seIsSubmitting(false);
       }
     } catch (error) {}
+    seIsSubmitting(false);
   };
 
   return (
