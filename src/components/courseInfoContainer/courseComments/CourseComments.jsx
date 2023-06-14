@@ -15,9 +15,11 @@ import { useAuth } from "../../../context/AuthContext";
 // This component renders users comments about the course in the course page and displays the admin responses to users comments.
 const CourseComments = ({ param }) => {
   const admin = useAuth();
-  console.log(admin.isAdmin);
+
+  /* Getting  user comments*/
   const { data } = useFetch(getAllComments);
 
+  /* Saving  user comments*/
   const [comments, setComments] = useState([]);
   useEffect(() => {
     const filteredComments = admin.isAdmin
@@ -46,6 +48,7 @@ const CourseComments = ({ param }) => {
                   answer={false}
                   key={comm._id}
                   setComments={setComments}
+                  allComments={comments}
                 />
                 {comm.answer && (
                   <CommentCard
@@ -53,6 +56,8 @@ const CourseComments = ({ param }) => {
                     Class={"ml-[6.5%] "}
                     comment={comm}
                     answer={true}
+                    setComments={setComments}
+                    allComments={comments}
                   />
                 )}
               </>

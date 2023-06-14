@@ -13,17 +13,16 @@ import { useFetch } from "../../../hooks/useFetch";
 import { useAuth } from "../../../context/AuthContext";
 
 // This component renders the form on the target course page for the user to comment on that course.
-const ReplyForm = ({ commentId, setComments }) => {
+const ReplyForm = ({ allComments, setComments, studentComment }) => {
   const auth = useAuth();
 
   /* Rendering spinner while we are waiting for backend response. */
   const [isLoading, setIsLoading] = useState(false);
 
   const commentsData = useFetch(getAllComments);
-  console.log("commentsData", commentsData);
+
   const param = useParams();
-  console.log("param", param);
-  console.log("commentId", commentId);
+
   const {
     register,
     handleSubmit,
@@ -37,20 +36,23 @@ const ReplyForm = ({ commentId, setComments }) => {
         toast.error("Only admins can post a comment.");
       } else {
         setIsLoading(true);
-        const response = await sendCommentAnswer(commentId, data.answer);
-        console.log("response", response);
+        const response = await sendCommentAnswer(
+          studentComment._id,
+          data.answer
+        );
+
         if (response.status === 200) {
           toast.success("Your reply successfully submitted.");
 
-          console.log("data", commentsData.data);
-          const filteredComments = FilterUnrelatedComments(
-            commentsData.data,
-            param.programId
+          const filteredComments = allComments.filter(
+            (comment) => comment.postId !== param.programId
           );
-          console.log("filteredComments", filteredComments);
-          setComments(filteredComments);
+          const newComment = {
+            ...studentComment,
+            answer: JSON.parse(response.config.data).answer,
+          };
 
-          console.log("response", response);
+          setComments([newComment, ...filteredComments]);
         }
       }
     } catch (error) {

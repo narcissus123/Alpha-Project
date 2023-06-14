@@ -4,6 +4,8 @@ import dateFormat from "dateformat";
 import { ReplyForm } from "../../replyForm/ReplyForm";
 import { VerifyModal } from "../../modal/VerifyModal";
 
+import { useAuth } from "../../../../context/AuthContext";
+
 import {
   UserImage,
   AdminImage,
@@ -12,17 +14,19 @@ import {
 } from "../../../../assets/svg/Svg";
 
 // This component renders user comment and admin response/answer to user comment.
-const CommentCard = ({ Class, comment, answer, setComments }) => {
+const CommentCard = ({ Class, comment, answer, setComments, allComments }) => {
   const [openAnswerForm, setOpenAnswerForm] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const [openVerifyModal, setOpenVerifyModal] = useState(false);
   const [isVerified, setIsverified] = useState(comment.verified);
 
+  const user = useAuth();
+
   return (
     <article
       class={`mb-6 h-auto rounded-lg border bg-white p-6 text-base ${Class} drop-shadow-md`}
     >
-      {/* Post header */}
+      {/* Post header. It includes student name, the date that comment posted and the option for admin to verify comment.  */}
 
       <div class="relative mb-6 flex flex-wrap items-center justify-between">
         <div class="flex flex-wrap items-center justify-start">
@@ -36,7 +40,8 @@ const CommentCard = ({ Class, comment, answer, setComments }) => {
           </p>
         </div>
 
-        {!answer && (
+        {/* Menu. Validation option and its modal. */}
+        {!answer && user.isAdmin && (
           <>
             <button
               id="dropdownComment1Button"
@@ -83,14 +88,18 @@ const CommentCard = ({ Class, comment, answer, setComments }) => {
           </>
         )}
       </div>
-      {/* Post content */}
+      {/* Reply option for admin */}
       <p class="whitespace-wrap h-auto overflow-y-auto text-gray-500">
         {answer ? `Reply: ${comment.answer}` : comment.comment}
       </p>
-      {!answer && (
+      {!answer && user.isAdmin && (
         <div class="mt-4 flex items-center space-x-4">
           {openAnswerForm ? (
-            <ReplyForm commentId={comment._id} setComments={setComments} />
+            <ReplyForm
+              allComments={allComments}
+              setComments={setComments}
+              studentComment={comment}
+            />
           ) : (
             <button
               type="button"
