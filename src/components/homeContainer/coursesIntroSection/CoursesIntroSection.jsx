@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, Fragment } from "react";
 
 import { CourseCart } from "./courseCart/CourseCart";
 import { Spinner } from "../../common/spinner/Spinner";
@@ -7,8 +7,39 @@ import { getCourses } from "../../../core/services/api/Courses.api";
 import { useFetch } from "../../../hooks/useFetch";
 
 import { LeftArrowImage, RightArrowImage } from "../../../assets/svg/Svg";
+import { Slider } from "../../common/slider/Slider";
+// This component renders a carousel. Each item of carousel renders a course detail and leads user to that course page for more information.
+// const CoursesIntroSection = () => {
+//   /* Call API to get courses.*/
+//   const { isLoading, data } = useFetch(getCourses);
+
+//   return (
+//     <Slider numberOfSlides="5" isLoading={isLoading}>
+//       {data.slice(0, 5).map((program, index) => (
+//         <div class="relative h-screen w-screen text-white" key={index}>
+//           <CourseCart program={program} />
+//         </div>
+//       ))}
+//     </Slider>
+//   );
+// };
+
+// export { CoursesIntroSection };
 
 // This component renders a carousel. Each item of carousel renders a course detail and leads user to that course page for more information.
+
+//////////////////////////////////////////////////////////////////////
+// import { useState, useEffect, Fragment } from "react";
+
+// import { CourseCart } from "./courseCart/CourseCart";
+// import { Spinner } from "../../common/spinner/Spinner";
+
+// import { getCourses } from "../../../core/services/api/Courses.api";
+// import { useFetch } from "../../../hooks/useFetch";
+
+// import { LeftArrowImage, RightArrowImage } from "../../../assets/svg/Svg";
+
+// // This component renders a carousel. Each item of carousel renders a course detail and leads user to that course page for more information.
 const CoursesIntroSection = () => {
   /* Call API to get courses.*/
   const { isLoading, data } = useFetch(getCourses);
