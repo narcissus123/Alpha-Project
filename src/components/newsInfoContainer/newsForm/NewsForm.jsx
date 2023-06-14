@@ -12,6 +12,7 @@ import { getItem } from "../../../core/services/storage/Storage";
 // This component renders the form on the target news page for the user to comment on that news.
 const NewsForm = ({ param }) => {
   const user = useAuth();
+  const userInfo = JSON.parse(getItem("user"));
 
   /* Rendering spinner while we are waiting for backend response. */
   const [isLoading, setIsLoading] = useState(false);
@@ -24,12 +25,12 @@ const NewsForm = ({ param }) => {
 
   const onSubmit = async (data) => {
     try {
-      const userInfo = JSON.parse(getItem("user"));
-
       /* Prevent users from commenting if they are not logged in */
-      if (!user.isStudent) {
-        toast("To post a comment, please log in to your account.");
-      } else {
+      if (!user.isStudent && !user.isAdmin) {
+        toast.error("To post a comment, please log in to your account.");
+      } else if (user.isAdmin) {
+        toast.error("Only Students can leave a comment.");
+      } else if (user.isStudent) {
         const userComment = {
           postId: param.newsId,
           email: userInfo.email,
@@ -40,7 +41,7 @@ const NewsForm = ({ param }) => {
         setIsLoading(true);
         const response = await SendUserComments(userComment);
 
-        if (response.status == 200) {
+        if (response.status === 200) {
           toast.success("Your post successfully submitted.");
         }
       }
@@ -67,9 +68,9 @@ const NewsForm = ({ param }) => {
             <input
               class="mb-2 w-1/3 rounded-lg border border-gray-200 bg-white py-1.5 px-2 text-gray-900 focus:outline-none focus:ring-0"
               placeholder="Username"
-              {...register("userName", { required: "This is required." })}
+              value={userInfo.email}
+              readonly
             />
-            <ErrorMessages name="userName" errors={errors} />
 
             <div class="mb-4 max-w-lg rounded-lg rounded-t-lg border border-gray-200 bg-white py-2 px-4 sm:max-w-xl md:max-w-2xl lg:max-w-3xl ">
               <textarea
