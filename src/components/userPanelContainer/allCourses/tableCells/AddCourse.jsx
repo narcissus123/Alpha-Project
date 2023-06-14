@@ -3,7 +3,7 @@ import { Fragment, useState } from "react";
 import { AddCourseModal } from "../modal/AddCourseModal";
 
 // This component renders add button in the table. This button opens the add course modal. shows the modal. Users should verify that they want to enroll into the course they selected.
-const AddCourse = ({ selectedCourse }) => {
+const AddCourse = ({ selectedCourse, setRows, rows }) => {
   const [open, setOpen] = useState(false);
 
   //modal
@@ -16,7 +16,12 @@ const AddCourse = ({ selectedCourse }) => {
         Add
       </button>
       {open && (
-        <AddCourseModal setOpen={setOpen} selectedCourse={selectedCourse} />
+        <AddCourseModal
+          setOpen={setOpen}
+          selectedCourse={selectedCourse}
+          setRows={setRows}
+          rows={rows}
+        />
       )}
     </Fragment>
   );

@@ -9,7 +9,7 @@ import { getItem } from "../../../../core/services/storage/Storage";
 import { NotifyImage } from "../../../../assets/svg/Svg";
 
 // This component shows the modal. Users should verify that they want to enroll into the course they selected.
-const AddCourseModal = ({ setOpen, selectedCourse }) => {
+const AddCourseModal = ({ setOpen, selectedCourse, setRows, rows }) => {
   const [isSubmitting, seIsSubmitting] = useState(false);
 
   const handleCourseRegistration = async () => {
@@ -18,16 +18,27 @@ const AddCourseModal = ({ setOpen, selectedCourse }) => {
 
       seIsSubmitting(true);
       const response = await addCourse(selectedCourse._id, userInfo._id);
+
+      // If student enrolled in the course successfully, We remove registered course from list of courses that student can register.
       if (response.status === 200) {
-        toast.success("Course successfully has been added.");
-        seIsSubmitting(false);
+        const removeRegisteredCourse = rows.filter((course) => {
+          return selectedCourse._id !== course.original._id;
+        });
+
+        const updatedCourseList = removeRegisteredCourse.map((course) => {
+          return course.original;
+        });
+
+        setRows(updatedCourseList);
+
+        toast.success("Course added successfully.");
       }
 
       if (response.status === 401) {
         toast.error("you are logged out of your account. Please log in again.");
-        seIsSubmitting(false);
       }
     } catch (error) {}
+    seIsSubmitting(false);
   };
 
   return (
