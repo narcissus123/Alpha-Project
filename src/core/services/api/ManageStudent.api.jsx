@@ -10,4 +10,13 @@ const updateStudentInfo = async (userId, obj) => {
   }
 };
 
-export { updateStudentInfo };
+const getStudentById = async (studentId) => {
+  try {
+    const response = await instance.get(`/api/student/${studentId}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export { updateStudentInfo, getStudentById };
