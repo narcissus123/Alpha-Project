@@ -38,12 +38,17 @@ const SignInForm = () => {
     try {
       setIsLoading(true);
       const response = await SignInStudent(data);
-      if (response.success) {
+
+      if (response.status === 200) {
         toast.success("You are successfully signed in!");
         user.loginAsStudent(Boolean(getItem("user")) === true);
         history("/home");
       } else {
-        toast.error("Something went wrong! Please try again.");
+        if (response.status === 400) {
+          toast.error("Email or password is wrong.");
+        } else {
+          toast.error("Something went wrong! Please try again.");
+        }
       }
     } catch (error) {
       toast.error(error);

@@ -4,12 +4,14 @@ import { instance } from "../interceptor/Interceptor";
 const SignInStudent = async (obj) => {
   try {
     const response = await instance.post("/api/auth/login", obj);
-    const token = response.data.result.jwtToken;
-    const user = JSON.stringify(response.data.result.studentModel);
-    setItem("token", token);
-    setItem("user", user);
 
-    return response.data;
+    if (response.status === 200) {
+      const token = response.data.result.jwtToken;
+      const user = JSON.stringify(response.data.result.studentModel);
+      setItem("token", token);
+      setItem("user", user);
+    }
+    return response;
   } catch (error) {
     return error;
   }
