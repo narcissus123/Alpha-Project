@@ -150,7 +150,9 @@ const Header = () => {
           </div>
           {/* Notifications */}
           <button
-            class="relative order-1 inline-flex items-center rounded-full border p-1 text-center text-sm font-medium text-gray-500 hover:text-gray-900 focus:outline-none"
+            class={`${
+              user.isAdmin ? "relative" : "hidden"
+            } order-1 inline-flex items-center rounded-full border p-1 text-center text-sm font-medium text-gray-500 hover:text-gray-900 focus:outline-none`}
             type="button"
             onClick={() => setOpenNotification(!openNotification)}
           >
