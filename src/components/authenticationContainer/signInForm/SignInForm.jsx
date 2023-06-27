@@ -44,7 +44,7 @@ const SignInForm = () => {
         user.loginAsStudent(Boolean(getItem("user")) === true);
         history("/home");
       } else {
-        if (response.status === 400) {
+        if (response.status === 400 || response.status === 403) {
           toast.error("Email or password is wrong.");
         } else {
           toast.error("Something went wrong! Please try again.");
