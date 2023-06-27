@@ -37,7 +37,7 @@ const VerifyModal = ({ commentId, setOpenVerifyModal, setIsverified }) => {
         isSubmitting={isSubmitting}
       >
         {/* Content */}
-        <div class="shadow-xl relative transform  overflow-hidden rounded-b-lg border bg-white text-left transition-all sm:w-full sm:max-w-lg">
+        <div class="shadow-xl relative transform  overflow-hidden border bg-white text-left transition-all sm:w-full sm:max-w-lg">
           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div class="sm:flex sm:items-start">
               <div class="bg-white-100 mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border border-yellow-600 sm:mx-0 sm:h-10 sm:w-10">
