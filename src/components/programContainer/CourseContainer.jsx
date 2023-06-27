@@ -50,7 +50,7 @@ const CourseContainer = () => {
   filteredData = sortCourses(filteredData, isSorting);
 
   return (
-    <div class="w-screen">
+    <div class="w-screen pb-12">
       <Top
         title="Programs"
         inputValue={searchedCourse}
@@ -66,7 +66,7 @@ const CourseContainer = () => {
       {isLoading ? (
         <Spinner Class="h-[43rem]" />
       ) : (
-        <div class="grid-col grid h-auto overflow-hidden transition-all duration-1000 ease-linear ">
+        <div class="grid-col grid h-auto transition-all duration-1000 ease-linear ">
           <ToastContainer />
 
           <div class="w=4/5 m-auto grid h-auto grid-cols-2 sm:w-11/12 lg:grid-cols-3">

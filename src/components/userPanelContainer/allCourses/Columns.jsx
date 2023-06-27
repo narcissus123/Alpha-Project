@@ -32,7 +32,7 @@ export const Columns = (setRows) => {
       Footer: "Start Date",
       accessor: "startDate",
       Cell: (props) => {
-        return <span>{dateFormat(props.value.startDate, "mm/dd/yyyy")}</span>;
+        return <span>{dateFormat(props.value, "mm/dd/yyyy")}</span>;
       },
       Filter: ColumnFilter,
     },
@@ -41,7 +41,7 @@ export const Columns = (setRows) => {
       Footer: "End Date",
       accessor: "endDate",
       Cell: (props) => {
-        return <span>{dateFormat(props.value.endDate, "mm/dd/yyyy")}</span>;
+        return <span>{dateFormat(props.value, "mm/dd/yyyy")}</span>;
       },
       Filter: ColumnFilter,
     },

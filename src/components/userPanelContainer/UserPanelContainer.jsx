@@ -41,11 +41,21 @@ const UserPanelContainer = (props) => {
       >
         <div class="h-full w-full">
           <div class="ml-1/12 mt-12 flex w-10/12 items-center gap-4 rounded-xl border bg-white p-2 text-slate-800 lg:mx-auto lg:mt-14 lg:w-11/12 lg:p-3">
-            <div class="h-14 w-14 overflow-hidden rounded-full border border-customGreen ">
-              {user.profile ? (
-                <img src={user.profile} class="h-14 w-14 object-cover " />
+            <div>
+              {user.profile === "" ||
+              user.profile === "empty.png" ||
+              user.profile === "image.png" ? (
+                <div class="h-14 w-14 overflow-hidden rounded-full border border-customGreen ">
+                  <UserImage3 />
+                </div>
               ) : (
-                <UserImage3 />
+                <div class="h-14 w-14 overflow-hidden rounded-full border border-customGreen ">
+                  {" "}
+                  <img
+                    src={user.profile}
+                    class="h-14 w-14 object-cover "
+                  />{" "}
+                </div>
               )}
             </div>
             <span class="sm:text-sm md:text-base lg:text-lg">
