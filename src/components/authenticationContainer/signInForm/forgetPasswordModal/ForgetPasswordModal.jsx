@@ -44,7 +44,7 @@ const ForgetPasswordModal = ({
             </button>
           </div>
           {/* Content */}
-          <div class="shadow-xl relative transform  overflow-hidden rounded-b-lg border bg-white text-left transition-all sm:w-full sm:max-w-lg">
+          <div class="shadow-xl relative transform  overflow-hidden border bg-white text-left transition-all sm:w-full sm:max-w-lg">
             <form
               class="mx-auto mt-16 w-9/12 md:w-8/12 lg:w-7/12"
               onSubmit={handleSubmit(onSubmit)}
