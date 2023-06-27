@@ -138,7 +138,7 @@ const Header = () => {
                 ) : (
                   <li
                     key={index}
-                    class="block border-b px-4 py-3 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff] md:hidden"
+                    class="block border-b px-4 py-3 hover:cursor-pointer hover:bg-gray-100 hover:text-[#747bff]  md:hidden"
                   >
                     <Link to={navItem.link} class="block w-full">
                       {navItem.title}
@@ -177,7 +177,7 @@ const Header = () => {
 
         {/* Menu for medium and large screen sizes for users who are not signed in. */}
         {!user.isStudent && !user.isAdmin && (
-          <ul class="order-2 mr-2 py-2 text-base font-bold text-gray-700">
+          <ul class="order-2 mr-2 hidden py-2 text-base font-bold text-gray-700 md:block ">
             <Link
               to="/login"
               class="block p-0 text-gray-700 hover:text-blue-700 focus:text-blue-700"
