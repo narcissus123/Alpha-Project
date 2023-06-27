@@ -16,7 +16,7 @@ const AdminLogoutContainer = () => {
 
       user.loginAsAdmin(Boolean(getItem("admin")) === true);
 
-      window.location.href = "http://localhost:5173/";
+      window.location.href = "http://localhost:5174/";
     }
   });
 
