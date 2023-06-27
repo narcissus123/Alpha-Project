@@ -71,10 +71,10 @@ const NewsCard = ({ data, index }) => {
         </div>
       ) : (
         <div
-          class={`absolute left-1/4 h-72 w-72 rounded-full bg-white shadow-customShadow sm:h-80 sm:w-80 md:h-96 md:w-96 ${
+          class={`absolute h-72 w-72 rounded-full bg-white shadow-customShadow sm:h-80 sm:w-80 md:left-[35%] md:h-96 md:w-96 lg:left-[35%] ${
             show.itemOne
-              ? "translate-x-[30%] transform duration-[4s]"
-              : "translate-x-[100%] transform duration-[4s]"
+              ? "translate-x-[40%] transform duration-[4s] md:-translate-x-[48%] lg:-translate-x-[15%]"
+              : "translate-x-[100%] transform duration-[4s] md:translate-x-[35%] lg:translate-x-[35%]"
           }`}
           ref={picRef}
         >
