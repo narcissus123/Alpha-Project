@@ -5,7 +5,7 @@ import { ImageFrame } from "../../common/imageFrame/ImageFrame";
 import { useAuth } from "../../../context/AuthContext";
 import { UseComponentIntoView } from "../../../hooks/UseComponentIntoView";
 
-// This section leads the user to the login page.
+// This section leads the user to the login page. There are also some information about institute.
 const EnrollmentSection = () => {
   const user = useAuth();
 
@@ -37,7 +37,7 @@ const EnrollmentSection = () => {
           easier for yourself.{" "}
         </span>
         <button
-          class={`w-30 mx-auto rounded-full border  bg-white py-1 text-customGreen2 hover:border-transparent  hover:text-white lg:w-40 ${
+          class={`mx-auto w-32 rounded-full border  bg-white py-1 text-customGreen2 hover:border-transparent  hover:text-white lg:w-40 ${
             user.isStudent || user.isAdmin
               ? "cursor-none border-gray-500 hover:bg-gray-500"
               : "cursor-pointer border-customGreen2 hover:bg-customGreen2"
